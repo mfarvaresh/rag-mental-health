@@ -1,0 +1,32 @@
+[project]
+name = "rag-mental-health"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "mfarvaresh", email = "mokhtar2.farvaresh@live.uwe.ac.uk"}
+]
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=0.3.26,<0.4.0",
+    "chromadb>=1.0.15,<2.0.0",
+    "sentence-transformers>=5.0.0,<6.0.0",
+    "typer>=0.16.0,<0.17.0",
+    "llama-cpp-python>=0.3.12,<0.4.0",
+    "requests>=2.32.4,<3.0.0"
+]
+
+[project.scripts]
+ragmh = "ragmh.cli:app"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+black = "^25.1.0"
+ruff = "^0.12.2"
+
+[[tool.poetry.packages]]
+include = "ragmh"
+from = "src"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

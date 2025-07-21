@@ -1,0 +1,20 @@
+"""RAG Mental Health package"""
+
+# Import main functions for easy access
+from .ingest import ingest_all_data
+from .chunk import chunk_all_data
+from .embed import embed_all_sources
+from .vectordb import build_vectordb
+from .chains import run_rag_pipeline, compare_with_vanilla_llm
+from .llm import verify_ollama_connection
+
+__version__ = "0.1.0"
+__all__ = [
+    "ingest_all_data",
+    "chunk_all_data", 
+    "embed_all_sources",
+    "build_vectordb",
+    "run_rag_pipeline",
+    "compare_with_vanilla_llm",
+    "verify_ollama_connection"
+]
