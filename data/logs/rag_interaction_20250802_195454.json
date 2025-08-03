@@ -1,0 +1,21 @@
+{
+  "query": "How can I manage anxiety?",
+  "response": "Error: OPENAI_API_KEY not set.",
+  "contexts": [
+    "[Professional Therapist Response]\nQuestion: I started having anxiety three months ago. I'm new to having anxiety, and it's making me depressed.\n\nAnswer: One of the first steps is to manage anxiety and depression symptoms are to establish a good self-care routine. Start with the most basic things: Eating balanced meals, sleeping at from 6-8 hours and exercise at least 30 minutes a day. These will help you to regulate the chemical imbalance that affects your mood, plus exercising gives you time to vent and be distracted from your thoughts.",
+    "[Professional Therapist Response]\nreduce and manage anxiety symptoms. Looking at your eating, sleeping, physical activities, spirituality and leisure time is key to find that balance.If you find yourself struggling with anxiety, you can contact a Counselor or mental health provider.",
+    "[Professional Therapist Response]\nQuestion: I have anxieties about everyday stressors, i.e. finances, work, relationships, kids, and maintaining a household.\n\nAnswer: Something to remember about anxiety is that it's a useful and necessary response to stressors, and we all have a level of anxiety that falls somewhere on the spectrum from very slight to very overwhelming. Anxiety is our brain's way of prompting us to deal with the stress in our lives by getting us geared up for action. Some helpful ways of managing anxiety are actually very simple. The first I'd recommend is a calm breathing technique - breathe in for 4-5 seconds, and then out for 7-8 seconds.",
+    "[Community Discussion from r/Anxiety (Score: 276)]\nTitle: Strategy that's basically cured my health anxiety I've struggled with health anxiety since I was about 20, and I'm 38 now. So I've lived with this a long time. This is definitely not an overnight fix, and I have generally improved my ability to deal with intrusive thoughts over the years. But this practical strategy has probably been the most helpful in managing my health anxiety long-term.",
+    "[Professional Therapist Response]\nthings you have control over. Anxiety is really good at putting everything you feel out of control of on a giant metaphorical projection screen. Try projecting some of the things you have control over instead. For example--you have total control over breathing patterns, what you choose to wear the next day, what you pay attention to if you go for a walk, etc. You also have control over how you personalize that list to what matters to you."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "reddit",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 2.075761,
+  "timestamp": "2025-08-02T19:54:51.967204"
+}

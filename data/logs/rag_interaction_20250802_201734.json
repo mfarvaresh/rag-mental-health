@@ -1,0 +1,21 @@
+{
+  "query": "What are signs of depression?",
+  "response": "Error: GEMINI_API_KEY not set.",
+  "contexts": [
+    "[Professional Therapist Response]\nQuestion: I always feel like I'm doing something wrong. Everything I do is crappy. I want to cry all the time. I can't eat or sleep.\n\nAnswer: You are describing some of the most common symptoms of depression: low self esteem, difficulty sleeping, changes in appetite, sad mood, feelings of hopeless and feelings of worthlessness. A full assessment/evaluation with a mental health professional is warranted to understand if indeed you meet criteria for a Major Depressive Disorder i.e.., are delressed.",
+    "[Professional Therapist Response]\nsay) and lack of energy. According to the DSM-V (Diagnostic and Statistical Manual of Mental Disorders), depression includes the following symptoms:-Depressed mood-Irritable mood-Decreased interest or pleasure in activities you usually participate in or enjoy-Significant weight change or change in appetite-Change in sleep (insomnia or hypersomnia)-Psychomotor aggitation or retardation-Fatigue or loss in energy -Feelings of worthlessness or excessive guilt-Diminished ability to concentrate or indecisiveness-Thoughts of suicide or plan The great news is that there are many ways to improve depressive symptoms.",
+    "[Professional Therapist Response]\nall common symptoms of depression. Often times, these symptoms can be overlooked and mistaken for \"just being tired.\" Furthermore, it's important to ask yourself, if you are feeling worthless, problems with concentration and recurrent thoughts of death. If you are having these symptoms, please seek help IMMEDIATELY. Lastly, considering your stated symptoms I would recommend reaching out to your Doctor for further consult.",
+    "[Professional Therapist Response]\nhave seasonal depression or SAD. Here are the symptoms:Feeling grumpy, sad , nervous of having mood swingsAnhedonia or lack of pleasure in things you normally loveEating much more or less than usualGaining weightSleeping a lot more than you normally do, but still feeling sluggingDifficulty concentratingIt is so important to look at SAD in a holistic manner before getting diagnosed.",
+    "[Professional Therapist Response]\nDepressive Disorder i.e.., are delressed. One thing I often tell patients is that \"Do you think you are depressed?\" People often answer yes or no, but many individuals respond with a question: How would I know? To that I often explain that if I stopped watching movies or better, stopped enjoying watching movies that would be a clear indication for me that I am delressed. It would be a sign that I have lost pleasure or interest in the activity that I typically enjoy most ."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 2.68719,
+  "timestamp": "2025-08-02T20:17:31.350069"
+}

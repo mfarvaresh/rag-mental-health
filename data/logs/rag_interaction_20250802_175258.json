@@ -1,0 +1,21 @@
+{
+  "query": "i have depression",
+  "response": "It's really brave of you to acknowledge how you feel and seek support for what might be a challenging time in your life. Remember, seeking help from professionals can provide guidance tailored specifically to you, which is an important step towards feeling better. Meanwhile, small daily changes like staying hydrated or taking the stairs could bring positive shifts into your routine that may lift your spirits over time. Keep exploring what brings joy back into your life and consider reaching out for professional support as well—it can make a significant difference in managing depression effectively.",
+  "contexts": [
+    "[Professional Therapist Response]\nQuestion: I'm starting to think that I might have depression. The thing is though, I'm not exactly sad. I can joke with my friends and stuff, but I've stopped caring about my work, and I've been starting to think that life is pointless. I really have no clue if I need help, or if I'm just tired or something.\n\nAnswer: Depression isn't something someone \"has\", it is a dark mood and lack of satisfaction with the way the current life is structured.If you think of depression as motivation to look for new ways to understand yourself, find ways which are more satisfying in your work and relationships, then depression is a charm.The typical attitude most people have when they think of the word \"depression\", is that their life will collapse and decline, they'll need to take drugs, and feel hopeless.If you take a different approach and work with your depression as a signal to change some major area or one or two minor areas, then you will engage yourself in creating a better life for yourself!",
+    "[Professional Therapist Response]\ncauses for your current condition. Most often, difficult situations that life throws at us, along with an inability to think positively, and break bad habits are what cause depression. Some things you can do immediately are seek help from a professional, schedule in time every day to engage in pleasurable (or once pleasurable) activities, exercise daily, and practice thinking more positively. Set a few daily goals for yourself and write them down each morning or the night before.",
+    "[Professional Therapist Response]\non my website about this. Second, although what you are describing sounds consistent with depression, know that you - with professional help -- can positively effect how you feel and perceive yourself and your surroundings. MANY others have felt similarly and have gotten betterThird, be curious about your situation.",
+    "[Professional Therapist Response]\nyourself in a positive way. If you aren't able to move yourself out of your depression,  work with a professional to make short-term goals and get some support. You may also talk to your doctor or psychiatrist about trying an anti-depressant to give you a little lift while you go through a rough patch.Best wishes,Karen",
+    "[Professional Therapist Response]\nQuestion: None Answer: I can relate been there at one point in my life. Start taking control of your life. Take small steps by making small changes to your eating and exercise each day. For example, drink one extra glass of water, take one flight of stairs, park farther away from store... Some changes help you take control of your depression by changing it to motivation."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 42.918635,
+  "timestamp": "2025-08-02T17:52:15.358067"
+}

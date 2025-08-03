@@ -1,0 +1,79 @@
+2025-08-03 02:37:59,944 - INFO - Loading data from data\counselchat\counselchat_qa.json
+2025-08-03 02:37:59,987 - INFO - Loaded 2775 entries
+2025-08-03 02:37:59,988 - INFO - Processing 2775 entries with LLM: ollama
+2025-08-03 02:38:02,037 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:38:02,278 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:38:04,492 - INFO - Use pytorch device: cpu
+2025-08-03 02:38:26,918 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:38:26,962 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:38:28,659 - INFO - Use pytorch device: cpu
+2025-08-03 02:38:41,147 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:38:41,191 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:38:42,892 - INFO - Use pytorch device: cpu
+2025-08-03 02:39:02,865 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:39:02,908 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:39:04,602 - INFO - Use pytorch device: cpu
+2025-08-03 02:39:20,485 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:39:20,532 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:39:22,112 - INFO - Use pytorch device: cpu
+2025-08-03 02:39:39,722 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:39:39,779 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:39:42,182 - INFO - Use pytorch device: cpu
+2025-08-03 02:40:02,091 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:40:02,141 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:40:03,228 - INFO - Use pytorch device: cpu
+2025-08-03 02:40:28,150 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:40:28,224 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:40:30,726 - INFO - Use pytorch device: cpu
+2025-08-03 02:40:52,978 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:40:53,047 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:40:55,502 - INFO - Use pytorch device: cpu
+2025-08-03 02:41:15,265 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:41:15,336 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:41:17,723 - INFO - Use pytorch device: cpu
+2025-08-03 02:41:42,802 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:41:42,842 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:41:44,145 - INFO - Use pytorch device: cpu
+2025-08-03 02:42:00,845 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:42:00,887 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:42:02,368 - INFO - Use pytorch device: cpu
+2025-08-03 02:42:24,987 - INFO - Connected to Ollama with model: phi3:mini
+2025-08-03 02:42:25,059 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:42:27,461 - INFO - Use pytorch device: cpu
+2025-08-03 02:42:57,314 - INFO - 
+Interrupted by user. Partial results saved.
+2025-08-03 02:48:32,552 - INFO - Loading data from data\counselchat\counselchat_qa.json
+2025-08-03 02:48:32,580 - INFO - Loaded 2775 entries
+2025-08-03 02:48:32,582 - INFO - Sampling 10 entries
+2025-08-03 02:48:32,583 - INFO - Processing 10 entries with LLM: gpt-3.5-turbo-0125
+2025-08-03 02:48:32,816 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:35,191 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:38,219 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:38,274 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:39,896 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:42,337 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:42,386 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:44,200 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:47,146 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:47,196 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:49,014 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:51,244 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:51,282 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:52,906 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:55,342 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:55,388 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:48:57,009 - INFO - Use pytorch device: cpu
+2025-08-03 02:48:59,846 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:48:59,885 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:49:01,715 - INFO - Use pytorch device: cpu
+2025-08-03 02:49:04,967 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:49:05,020 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:49:07,548 - INFO - Use pytorch device: cpu
+2025-08-03 02:49:11,009 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:49:11,088 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:49:13,387 - INFO - Use pytorch device: cpu
+2025-08-03 02:49:17,359 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:49:17,402 - INFO - Initialized ChromaDB at D:\term2\IGP\RAG\rag-mental-health\data\vectordb
+2025-08-03 02:49:19,580 - INFO - Use pytorch device: cpu
+2025-08-03 02:49:22,175 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-03 02:49:22,191 - INFO - Saved 10 evaluation entries to logs\eval_counselchat.json

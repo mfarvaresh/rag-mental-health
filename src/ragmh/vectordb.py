@@ -113,6 +113,13 @@ def load_and_index_chunks(collection,
             elif chunk['source'] == 'mind.org.uk':
                 metadata['topic'] = chunk['metadata'].get('topic', '')
                 metadata['url'] = chunk['metadata'].get('url', '')
+            elif chunk['source'] == 'pubmed':
+                metadata['title'] = chunk['metadata'].get('title', '')
+                metadata['pmid'] = chunk['metadata'].get('pmid', '')
+                metadata['query'] = chunk['metadata'].get('query', '')
+            elif chunk['source'] == 'who':
+                metadata['topic'] = chunk['metadata'].get('topic', '')
+                metadata['url'] = chunk['metadata'].get('url', '')
             
             metadatas.append(metadata)
             
@@ -140,19 +147,16 @@ def load_and_index_chunks(collection,
 def search_vectordb(query: str,
                    collection,
                    n_results: int = 5,
-                   filter_dict: Optional[Dict] = None) -> List[Dict]:
-    """Search the vector database"""
-    
-    # Query the collection
+                   filter_dict: Optional[Dict] = None,
+                   rerank: bool = True,
+                   top_k: int = 5) -> List[Dict]:
+    """Search the vector database with optional metadata filtering and reranking."""
     results = collection.query(
         query_texts=[query],
         n_results=n_results,
-        where=filter_dict  # Optional metadata filtering
+        where=filter_dict
     )
-    
-    # Format results
     formatted_results = []
-    
     for i in range(len(results['ids'][0])):
         result = {
             'id': results['ids'][0][i],
@@ -161,8 +165,52 @@ def search_vectordb(query: str,
             'distance': results['distances'][0][i] if 'distances' in results else None
         }
         formatted_results.append(result)
-    
+    # Rerank if enabled
+    if rerank and formatted_results:
+        from .vectordb import rerank_results
+        formatted_results = rerank_results(formatted_results, query, top_k=top_k)
     return formatted_results
+
+def hybrid_search_vectordb(query: str,
+                         collection,
+                         n_results: int = 5,
+                         filter_dict: Optional[Dict] = None,
+                         rerank: bool = True,
+                         top_k: int = 5) -> List[Dict]:
+    """Hybrid search: combine vector search with keyword filtering and reranking."""
+    # Step 1: Vector search
+    vector_results = collection.query(
+        query_texts=[query],
+        n_results=n_results * 2,  # get more for hybrid
+        where=filter_dict
+    )
+    formatted_results = []
+    for i in range(len(vector_results['ids'][0])):
+        result = {
+            'id': vector_results['ids'][0][i],
+            'text': vector_results['documents'][0][i],
+            'metadata': vector_results['metadatas'][0][i],
+            'distance': vector_results['distances'][0][i] if 'distances' in vector_results else None
+        }
+        formatted_results.append(result)
+    # Step 2: Keyword filtering (simple)
+    keyword_results = [r for r in formatted_results if query.lower() in r['text'].lower()]
+    # Step 3: Merge and deduplicate
+    all_results = keyword_results + [r for r in formatted_results if r not in keyword_results]
+    # Step 4: Rerank
+    if rerank and all_results:
+        from .vectordb import rerank_results
+        all_results = rerank_results(all_results, query, top_k=top_k)
+    return all_results[:top_k]
+
+def rerank_results(results: List[Dict], query: str, top_k: int = 5) -> List[Dict]:
+    """Rerank retrieved results using a cross-encoder for better relevance."""
+    from sentence_transformers import CrossEncoder
+    model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+    pairs = [(query, r['text']) for r in results]
+    scores = model.predict(pairs)
+    reranked = sorted(zip(results, scores), key=lambda x: x[1], reverse=True)
+    return [r for r, s in reranked[:top_k]]
 
 def delete_collection(client, collection_name: str = COLLECTION_NAME):
     """Delete a collection"""
@@ -236,6 +284,15 @@ def test_search(query: Optional[str] = None):
     results = search_vectordb(query, collection, n_results=3)
     
     for i, result in enumerate(results):
+        print(f"{i+1}. Source: {result['metadata']['source']}")
+        print(f"   Text: {result['text'][:200]}...")
+        print(f"   Metadata: {result['metadata']}")
+        print()
+    
+    # Rerank results
+    reranked_results = rerank_results(results, query, top_k=3)
+    print(f"=== Reranked Results ===\n")
+    for i, result in enumerate(reranked_results):
         print(f"{i+1}. Source: {result['metadata']['source']}")
         print(f"   Text: {result['text'][:200]}...")
         print(f"   Metadata: {result['metadata']}")

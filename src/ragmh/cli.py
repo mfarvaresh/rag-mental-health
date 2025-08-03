@@ -4,11 +4,11 @@ import logging
 from pathlib import Path
 
 # Import our modules
-from .ingest import ingest_all_data, download_counselchat, scrape_mind_content, fetch_reddit_posts
+from .ingest import ingest_all_data, download_counselchat, scrape_mind_content, fetch_reddit_posts, fetch_pubmed_abstracts, fetch_who_topic_summary
 from .chunk import chunk_all_data
 from .embed import embed_all_sources
-from .vectordb import build_vectordb, test_search
-from .chains import run_rag_pipeline, compare_with_vanilla_llm
+from .vectordb import build_vectordb, test_search, hybrid_search_vectordb
+from .chains import run_rag_pipeline
 
 def setup_logging(verbose: bool = False):
     """Configure logging"""
@@ -50,9 +50,11 @@ def main():
     query_parser = subparsers.add_parser('query', help='Query the RAG system')
     query_parser.add_argument('question', nargs='+', help='Your mental health question')
     query_parser.add_argument('--source', help='Filter by source')
-    
+    query_parser.add_argument('--llm', choices=['ollama', 'gpt-3.5-turbo-0125', 'gemini-1.5-flash-8b'], default='ollama', help='LLM to use (ollama, gpt-3.5-turbo-0125, gemini-1.5-flash-8b)')
+
     compare_parser = subparsers.add_parser('compare', help='Compare RAG vs vanilla LLM')
     compare_parser.add_argument('question', nargs='+', help='Question to compare')
+    compare_parser.add_argument('--llm', choices=['ollama', 'gpt-3.5-turbo-0125', 'gemini-1.5-flash-8b'], default='ollama', help='LLM to use (ollama, gpt-3.5-turbo-0125, gemini-1.5-flash-8b)')
     
     # Test command
     test_parser = subparsers.add_parser('test', help='Test the system')
@@ -61,9 +63,17 @@ def main():
     # Chat mode
     chat_parser = subparsers.add_parser('chat', help='Interactive chat mode')
     
+    # PubMed ingestion
+    pubmed_parser = subparsers.add_parser('pubmed', help='Ingest PubMed abstracts')
+    pubmed_parser.add_argument('query', help='Query for PubMed search')
+    pubmed_parser.add_argument('--max', type=int, default=30, help='Max results')
+    # WHO ingestion
+    who_parser = subparsers.add_parser('who', help='Ingest WHO topic summary')
+    who_parser.add_argument('topic', help='WHO topic slug (e.g. mental-health)')
+    
     # Add verbose flag to all subparsers
     for subparser in [setup_parser, ingest_parser, chunk_parser, embed_parser, 
-                     vectordb_parser, query_parser, compare_parser, test_parser, chat_parser]:
+                     vectordb_parser, query_parser, compare_parser, test_parser, chat_parser, pubmed_parser, who_parser]:
         subparser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
     
     args = parser.parse_args()
@@ -126,11 +136,22 @@ def main():
     
     elif args.command == 'query':
         query = ' '.join(args.question)
-        run_rag_pipeline(query, source_filter=args.source)
+        # Use advanced hybrid search for retrieval
+        from .vectordb import init_chromadb
+        client = init_chromadb()
+        collection = client.get_collection("mental_health_rag")
+        results = hybrid_search_vectordb(query, collection, n_results=10, filter_dict={'source': args.source} if args.source else None)
+        print("\n=== Hybrid Search Results ===")
+        for i, r in enumerate(results, 1):
+            print(f"{i}. Source: {r['metadata'].get('source', '')}")
+            print(f"   Text: {r['text'][:200]}...")
+            print(f"   Metadata: {r['metadata']}")
+            print()
+        # Optionally, still run the full RAG pipeline for answer generation
+        run_rag_pipeline(query, source_filter=args.source, llm=args.llm)
     
     elif args.command == 'compare':
-        query = ' '.join(args.question)
-        compare_with_vanilla_llm(query)
+        print("\n[compare] This feature is currently unavailable. Please update your CLI or re-implement compare_with_vanilla_llm if needed.")
     
     elif args.command == 'test':
         # Test vector search
@@ -146,18 +167,31 @@ def main():
         print("\n🧠 Mental Health RAG Chat")
         print("Commands: 'quit' to exit, 'compare <query>' for comparison")
         print("-"*60)
-        
+        llm = 'ollama'
+        try:
+            import readline  # for better input UX if available
+        except ImportError:
+            pass
         while True:
             query = input("\n❓ You: ").strip()
-            
             if query.lower() == 'quit':
                 print("👋 Goodbye!")
                 break
+            elif query.lower().startswith('llm '):
+                llm_choice = query[4:].strip()
+                if llm_choice in ['ollama', 'gpt-3.5-turbo-0125', 'gemini-1.5-flash-8b']:
+                    llm = llm_choice
+                    print(f"[LLM switched to: {llm}]")
+                else:
+                    print("Invalid LLM. Choose from: ollama, gpt-3.5-turbo-0125, gemini-1.5-flash-8b.")
             elif query.lower().startswith('compare '):
-                test_query = query[8:]  # Remove 'compare '
-                compare_with_vanilla_llm(test_query)
+                print("[compare] This feature is currently unavailable. Please update your CLI or re-implement compare_with_vanilla_llm if needed.")
             elif query:
-                run_rag_pipeline(query)
+                run_rag_pipeline(query, llm=llm)
+    elif args.command == 'pubmed':
+        fetch_pubmed_abstracts(args.query, max_results=args.max)
+    elif args.command == 'who':
+        fetch_who_topic_summary(args.topic)
     
     else:
         parser.print_help()

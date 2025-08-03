@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 """Quick script to build the entire RAG index"""
 import sys
+import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 from pathlib import Path
 
 # Add parent directory to path
@@ -28,10 +31,10 @@ def main():
     print("\n1️⃣  Ingesting data...")
     ingest_all_data()
     
-    print("\n2️⃣  Chunking documents...")
+    print("\n2️⃣  Chunking documents (including PubMed and WHO)...")
     chunk_all_data()
     
-    print("\n3️⃣  Generating embeddings...")
+    print("\n3️⃣  Generating embeddings (including PubMed and WHO)...")
     embed_all_sources()
     
     print("\n4️⃣  Building vector database...")
@@ -42,6 +45,9 @@ def main():
     print("- Run queries: python -m ragmh query 'your question'")
     print("- Start chat: python -m ragmh chat")
     print("- Compare: python -m ragmh compare 'your question'")
+    print("- Run queries: python -m ragmh pubmed 'your query' --max 30")
+    print("- Run queries: python -m ragmh who mental-health")
+
 
 if __name__ == "__main__":
     main()

@@ -8,6 +8,10 @@ from typing import List, Dict, Optional
 import logging
 from datasets import load_dataset
 import time
+import random
+from bs4 import BeautifulSoup
+from .chunk import chunk_pubmed_data, chunk_who_data
+from .embed import embed_pubmed_and_who
 
 logger = logging.getLogger(__name__)
 
@@ -92,22 +96,23 @@ def get_mind_topics() -> List[str]:
     return topics
 
 def scrape_mind_page(topic: str) -> Dict:
-    """Scrape a single Mind.org.uk page (simplified version)"""
+    """Scrape a single Mind.org.uk page with improved anti-bot evasion and parsing"""
     url = f"https://www.mind.org.uk/information-support/types-of-mental-health-problems/{topic}/"
-    
+    session = requests.Session()
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://www.google.com/'
+    }
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Educational Research Project)'
-        }
-        response = requests.get(url, headers=headers, timeout=10)
-        
+        response = session.get(url, headers=headers, timeout=10)
         if response.status_code == 200:
-            # Note: In production, use BeautifulSoup for proper HTML parsing
-            # This is a simplified example
+            soup = BeautifulSoup(response.text, "lxml")
+            text = soup.get_text(separator=' ', strip=True)
             content = {
                 'topic': topic,
                 'url': url,
-                'raw_html': response.text[:1000],  # Store first 1000 chars as sample
+                'text': text[:2000],  # Store first 2000 chars
                 'status': 'success',
                 'source': 'mind.org.uk'
             }
@@ -120,9 +125,9 @@ def scrape_mind_page(topic: str) -> Dict:
                 'source': 'mind.org.uk'
             }
             logger.warning(f"Failed to scrape {topic}: {response.status_code}")
-        
+        # Random delay to mimic human browsing
+        time.sleep(random.uniform(2, 5))
         return content
-        
     except Exception as e:
         logger.error(f"Error scraping {topic}: {e}")
         return {
@@ -204,34 +209,149 @@ def fetch_reddit_posts(subreddit: str = "mentalhealth",
     
     return posts
 
+# --- PubMed Ingestion Functions ---
+def fetch_pubmed_abstracts(query: str, max_results: int = 50) -> list:
+    """Fetch PubMed abstracts for a given query using Entrez API"""
+    import xml.etree.ElementTree as ET
+    import urllib.parse
+    PUBMED_ESEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+    PUBMED_EFETCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    params = {
+        'db': 'pubmed',
+        'term': query,
+        'retmax': max_results,
+        'retmode': 'json'
+    }
+    # Step 1: Search for IDs
+    resp = requests.get(PUBMED_ESEARCH, params=params)
+    idlist = resp.json().get('esearchresult', {}).get('idlist', [])
+    if not idlist:
+        logger.warning(f"No PubMed results for query: {query}")
+        return []
+    # Step 2: Fetch abstracts
+    fetch_params = {
+        'db': 'pubmed',
+        'id': ','.join(idlist),
+        'retmode': 'xml'
+    }
+    fetch_resp = requests.get(PUBMED_EFETCH, params=fetch_params)
+    root = ET.fromstring(fetch_resp.content)
+    results = []
+    for article in root.findall('.//PubmedArticle'):
+        title = article.findtext('.//ArticleTitle', default='')
+        abstract = article.findtext('.//Abstract/AbstractText', default='')
+        pmid = article.findtext('.//PMID', default='')
+        results.append({
+            'title': title,
+            'abstract': abstract,
+            'pmid': pmid,
+            'source': 'pubmed',
+            'query': query
+        })
+    logger.info(f"Fetched {len(results)} PubMed abstracts for '{query}'")
+    # Save to file
+    PUBMED_DIR = DATA_DIR / "pubmed"
+    PUBMED_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = PUBMED_DIR / f"pubmed_{query.replace(' ', '_')}.json"
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    return results
+
+# --- WHO Ingestion Functions ---
+def fetch_who_topic_summary(topic: str) -> dict:
+    """Download or scrape summary from WHO mental health topic page"""
+    WHO_BASE = "https://www.who.int/news-room/fact-sheets/detail/"
+    url = WHO_BASE + topic
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
+    }
+    try:
+        resp = requests.get(url, headers=headers, timeout=10)
+        if resp.status_code == 200:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(resp.text, 'lxml')
+            # Try to extract the summary (first paragraph or intro)
+            summary = ''
+            main = soup.find('div', {'id': 'PageContent_T001'}) or soup.find('main')
+            if main:
+                p = main.find('p')
+                if p:
+                    summary = p.get_text(strip=True)
+            if not summary:
+                # fallback: first <p> in page
+                p = soup.find('p')
+                if p:
+                    summary = p.get_text(strip=True)
+            result = {
+                'topic': topic,
+                'url': url,
+                'summary': summary,
+                'status': 'success',
+                'source': 'who'
+            }
+            logger.info(f"Fetched WHO summary for {topic}")
+        else:
+            result = {
+                'topic': topic,
+                'url': url,
+                'status': f'error_{resp.status_code}',
+                'source': 'who'
+            }
+            logger.warning(f"Failed to fetch WHO topic {topic}: {resp.status_code}")
+        WHO_DIR = DATA_DIR / "who"
+        WHO_DIR.mkdir(parents=True, exist_ok=True)
+        output_path = WHO_DIR / f"who_{topic.replace(' ', '_')}.json"
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+        return result
+    except Exception as e:
+        logger.error(f"Error fetching WHO topic {topic}: {e}")
+        return {
+            'topic': topic,
+            'url': url,
+            'status': 'error',
+            'error': str(e),
+            'source': 'who'
+        }
+
 # --- Main ingestion function ---
 def ingest_all_data():
     """Run complete data ingestion pipeline"""
     logger.info("Starting data ingestion pipeline...")
     logger.info(f"Project root: {PROJECT_ROOT.absolute()}")
     logger.info(f"Data directory: {DATA_DIR.absolute()}")
-    
     # 1. Download CounselChat
     counselchat_data = download_counselchat()
     if counselchat_data['train']:
         process_counselchat_qa(counselchat_data)
-    
     # 2. Scrape Mind.org.uk (limited to 3 topics for demo)
     mind_topics = get_mind_topics()[:3]  # Limit for demo
     scrape_mind_content(mind_topics)
-    
     # 3. Fetch Reddit posts
     fetch_reddit_posts("mentalhealth", limit=50)
     fetch_reddit_posts("Anxiety", limit=30)
     fetch_reddit_posts("depression", limit=30)
-    
+    # 4. Fetch PubMed abstracts for key topics
+    for topic in ["anxiety", "depression", "stress"]:
+        fetch_pubmed_abstracts(topic, max_results=30)
+    # 5. Fetch WHO summaries for key topics
+    for topic in ["mental-health", "depression", "anxiety-disorders"]:
+        fetch_who_topic_summary(topic)
+    # 6. Chunk PubMed and WHO data (now in chunk.py)
+    chunk_pubmed_data()
+    chunk_who_data()
+    # 7. Embed PubMed and WHO chunks (now in embed.py)
+    embed_pubmed_and_who()
     logger.info("Data ingestion complete!")
-    
     # Print summary
     print("\n=== Data Ingestion Summary ===")
     print(f"CounselChat: {COUNSELCHAT_DIR.absolute()}")
     print(f"Mind.org.uk: {MIND_DIR.absolute()}")
     print(f"Reddit: {REDDIT_DIR.absolute()}")
+    print(f"PubMed: {(DATA_DIR / 'pubmed').absolute()}")
+    print(f"WHO: {(DATA_DIR / 'who').absolute()}")
+    print(f"Chunks: {(DATA_DIR / 'chunks').absolute()}")
+    print(f"Embeddings: {(DATA_DIR / 'embeddings').absolute()}")
 
 
 if __name__ == "__main__":
@@ -248,5 +368,9 @@ if __name__ == "__main__":
             scrape_mind_content()
         elif sys.argv[1] == "reddit":
             fetch_reddit_posts()
+        elif sys.argv[1] == "pubmed":
+            fetch_pubmed_abstracts("mental health")
+        elif sys.argv[1] == "who":
+            fetch_who_topic_summary("depression")
     else:
         ingest_all_data()

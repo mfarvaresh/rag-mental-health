@@ -1,0 +1,21 @@
+{
+  "query": "i feel sad and depressed.",
+  "response": "I'm truly sorry to hear that you're feeling this way. It takes courage to share your feelings with someone, so thank you for opening up about it. If these feelings are persistent or overwhelming, talking to a trusted person who can provide support might be beneficial. Additionally, maintaining routines like regular meals and exercise could help improve how you feel day-to-day. Remember that seeking professional guidance is always an option if things become too much to handle alone. Your wellbeing matters greatly!",
+  "contexts": [
+    "[Professional Therapist Response]\nas feeling sad as well. If you're not sleeping well at night, that could be a big part of feeling sad a lot.Perhaps you could try to find a person or two who makes you feel totally safe and comfortable and try to talk with them.",
+    "[Professional Therapist Response]\nfeelings of hopelessness, that's different. First step, identify your own symptoms of depression. If you have any thoughts of hurting yourself, tell someone. If you're not sure, you can try 800-lifenet or other support line to get feedback. First aid for depression includes: daily care and feeding, good sleeping and eating, lots of exercise--even when you don't feel like it-- healthy socializing, and focusing on talking to yourself in a positive way.",
+    "[Professional Therapist Response]\nyourself in a positive way. If you aren't able to move yourself out of your depression,  work with a professional to make short-term goals and get some support. You may also talk to your doctor or psychiatrist about trying an anti-depressant to give you a little lift while you go through a rough patch.Best wishes,Karen",
+    "[Professional Therapist Response]\nyourself will not help you. Being able to express your feelings and problem solve will allow for some relief when feeling sad or angry.I wish you all the best!",
+    "[Professional Therapist Response]\nhelp you get remarkable relief. Therapy for depression can bring you hope, help and a way forward. Visit denvermhc.com to read more."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 32.873358,
+  "timestamp": "2025-07-22T14:56:10.627958"
+}

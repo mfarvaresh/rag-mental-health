@@ -155,6 +155,17 @@ def search_embeddings(query: str,
     
     return results
 
+def embed_pubmed_and_who():
+    """Generate embeddings for PubMed and WHO chunks"""
+    for source in ["pubmed", "who"]:
+        chunks = load_chunks(source)
+        if not chunks:
+            logger.warning(f"No chunks found for {source}")
+            continue
+        index = create_embedding_index(chunks)
+        save_embeddings(index, f"{source}_embeddings.pkl")
+        logger.info(f"Created embeddings for {source}: {len(chunks)} chunks")
+
 def embed_all_sources():
     """Generate embeddings for all data sources"""
     logger.info("Starting embedding generation...")
@@ -171,6 +182,9 @@ def embed_all_sources():
     
     # Save embeddings
     save_embeddings(index, "all_embeddings.pkl")
+    
+    # Also embed PubMed and WHO individually
+    embed_pubmed_and_who()
     
     # Print summary
     print("\n=== Embedding Summary ===")

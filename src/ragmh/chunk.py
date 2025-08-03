@@ -63,8 +63,27 @@ def create_chunks_with_overlap(text: str,
     
     return chunks
 
+def semantic_chunk_text(text: str, min_length: int = 100, max_length: int = 512) -> List[str]:
+    """Chunk text into semantically meaningful sentences or paragraphs."""
+    import nltk
+    nltk.download('punkt', quiet=True)
+    from nltk.tokenize import sent_tokenize
+    sentences = sent_tokenize(text)
+    chunks = []
+    current = ""
+    for sent in sentences:
+        if len(current) + len(sent) < max_length:
+            current += (" " if current else "") + sent
+        else:
+            if len(current) >= min_length:
+                chunks.append(current.strip())
+            current = sent
+    if len(current) >= min_length:
+        chunks.append(current.strip())
+    return chunks
+
 def chunk_counselchat_data() -> List[Dict]:
-    """Process CounselChat Q&A pairs into chunks"""
+    """Process CounselChat Q&A pairs into semantic chunks"""
     input_file = DATA_DIR / "counselchat" / "counselchat_qa.json"
     
     if not input_file.exists():
@@ -81,62 +100,38 @@ def chunk_counselchat_data() -> List[Dict]:
         combined_text = f"Question: {qa['question']}\n\nAnswer: {qa['answer']}"
         cleaned_text = clean_text(combined_text)
         
-        # If too long, chunk the answer part
-        if len(cleaned_text) > DEFAULT_CHUNK_SIZE:
-            question_part = f"Question: {qa['question']}\n\n"
-            answer_chunks = create_chunks_with_overlap(qa['answer'])
-            
-            for i, chunk in enumerate(answer_chunks):
-                chunk_data = {
-                    'text': question_part + f"Answer: {chunk}" if i == 0 else chunk,
-                    'source': 'counselchat',
-                    'metadata': {
-                        'topic': qa.get('topic', 'general'),
-                        'upvotes': qa.get('upvotes', 0),
-                        'chunk_index': i,
-                        'total_chunks': len(answer_chunks)
-                    }
-                }
-                chunks.append(chunk_data)
-        else:
-            # Single chunk for short Q&A
+        semantic_chunks = semantic_chunk_text(cleaned_text)
+        
+        for i, chunk in enumerate(semantic_chunks):
             chunk_data = {
-                'text': cleaned_text,
+                'text': chunk,
                 'source': 'counselchat',
                 'metadata': {
                     'topic': qa.get('topic', 'general'),
                     'upvotes': qa.get('upvotes', 0),
-                    'chunk_index': 0,
-                    'total_chunks': 1
+                    'chunk_index': i,
+                    'total_chunks': len(semantic_chunks)
                 }
             }
             chunks.append(chunk_data)
     
-    logger.info(f"Created {len(chunks)} chunks from CounselChat")
+    logger.info(f"Created {len(chunks)} semantic chunks from CounselChat")
     return chunks
 
 def chunk_reddit_data() -> List[Dict]:
-    """Process Reddit posts into chunks"""
+    """Process Reddit posts into semantic chunks"""
     chunks = []
     reddit_files = list((DATA_DIR / "reddit").glob("*.json"))
-    
     for file_path in reddit_files:
         with open(file_path, 'r', encoding='utf-8') as f:
             posts = json.load(f)
-        
         for post in posts:
-            # Combine title and text
             full_text = f"Title: {post['title']}\n\n{post['text']}"
             cleaned_text = clean_text(full_text)
-            
-            # Only process posts with substantial content
             if len(cleaned_text) < MIN_CHUNK_SIZE:
                 continue
-            
-            # Create chunks
-            text_chunks = create_chunks_with_overlap(cleaned_text)
-            
-            for i, chunk in enumerate(text_chunks):
+            semantic_chunks = semantic_chunk_text(cleaned_text)
+            for i, chunk in enumerate(semantic_chunks):
                 chunk_data = {
                     'text': chunk,
                     'source': 'reddit',
@@ -146,45 +141,32 @@ def chunk_reddit_data() -> List[Dict]:
                         'num_comments': post.get('num_comments', 0),
                         'post_id': post.get('id', ''),
                         'chunk_index': i,
-                        'total_chunks': len(text_chunks)
+                        'total_chunks': len(semantic_chunks)
                     }
                 }
                 chunks.append(chunk_data)
-    
-    logger.info(f"Created {len(chunks)} chunks from Reddit")
+    logger.info(f"Created {len(chunks)} semantic chunks from Reddit")
     return chunks
 
 def chunk_mind_data() -> List[Dict]:
-    """Process Mind.org.uk data into chunks"""
+    """Process Mind.org.uk data into semantic chunks"""
     input_file = DATA_DIR / "mind" / "mind_raw.json"
-    
     if not input_file.exists():
         logger.warning(f"Mind data not found at {input_file}")
         return []
-    
     with open(input_file, 'r', encoding='utf-8') as f:
         mind_data = json.load(f)
-    
     chunks = []
-    
     for page in mind_data:
         if page.get('status') != 'success':
             continue
-        
-        # Note: In real implementation, parse HTML properly
-        # For now, just use the raw HTML sample
         raw_html = page.get('raw_html', '')
-        
-        # Very basic text extraction (should use BeautifulSoup)
-        text = re.sub(r'<[^>]+>', ' ', raw_html)  # Remove HTML tags
+        text = re.sub(r'<[^>]+>', ' ', raw_html)
         cleaned_text = clean_text(text)
-        
         if len(cleaned_text) < MIN_CHUNK_SIZE:
             continue
-        
-        text_chunks = create_chunks_with_overlap(cleaned_text)
-        
-        for i, chunk in enumerate(text_chunks):
+        semantic_chunks = semantic_chunk_text(cleaned_text)
+        for i, chunk in enumerate(semantic_chunks):
             chunk_data = {
                 'text': chunk,
                 'source': 'mind.org.uk',
@@ -192,13 +174,64 @@ def chunk_mind_data() -> List[Dict]:
                     'topic': page['topic'],
                     'url': page['url'],
                     'chunk_index': i,
-                    'total_chunks': len(text_chunks)
+                    'total_chunks': len(semantic_chunks)
                 }
             }
             chunks.append(chunk_data)
-    
-    logger.info(f"Created {len(chunks)} chunks from Mind.org.uk")
+    logger.info(f"Created {len(chunks)} semantic chunks from Mind.org.uk")
     return chunks
+
+def chunk_pubmed_data() -> List[Dict]:
+    """Process PubMed abstracts into semantic chunks"""
+    PUBMED_DIR = DATA_DIR / "pubmed"
+    all_chunks = []
+    for file in PUBMED_DIR.glob("pubmed_*.json"):
+        with open(file, 'r', encoding='utf-8') as f:
+            records = json.load(f)
+        for rec in records:
+            if rec.get('abstract'):
+                semantic_chunks = semantic_chunk_text(rec['abstract'])
+                for i, chunk in enumerate(semantic_chunks):
+                    chunk_data = {
+                        'text': chunk,
+                        'source': 'pubmed',
+                        'metadata': {
+                            'title': rec.get('title', ''),
+                            'pmid': rec.get('pmid', ''),
+                            'query': rec.get('query', ''),
+                            'chunk_index': i,
+                            'total_chunks': len(semantic_chunks)
+                        }
+                    }
+                    all_chunks.append(chunk_data)
+    save_chunks(all_chunks, "pubmed_chunks.json")
+    logger.info(f"Saved {len(all_chunks)} PubMed semantic chunks to pubmed_chunks.json")
+    return all_chunks
+
+def chunk_who_data() -> List[Dict]:
+    """Process WHO summaries into semantic chunks"""
+    WHO_DIR = DATA_DIR / "who"
+    all_chunks = []
+    for file in WHO_DIR.glob("who_*.json"):
+        with open(file, 'r', encoding='utf-8') as f:
+            rec = json.load(f)
+        if rec.get('summary'):
+            semantic_chunks = semantic_chunk_text(rec['summary'])
+            for i, chunk in enumerate(semantic_chunks):
+                chunk_data = {
+                    'text': chunk,
+                    'source': 'who',
+                    'metadata': {
+                        'topic': rec.get('topic', ''),
+                        'url': rec.get('url', ''),
+                        'chunk_index': i,
+                        'total_chunks': len(semantic_chunks)
+                    }
+                }
+                all_chunks.append(chunk_data)
+    save_chunks(all_chunks, "who_chunks.json")
+    logger.info(f"Saved {len(all_chunks)} WHO semantic chunks to who_chunks.json")
+    return all_chunks
 
 def save_chunks(chunks: List[Dict], filename: str):
     """Save chunks to JSON file"""
@@ -226,6 +259,12 @@ def chunk_all_data():
     all_chunks.extend(mind_chunks)
     save_chunks(mind_chunks, "mind_chunks.json")
     
+    pubmed_chunks = chunk_pubmed_data()
+    all_chunks.extend(pubmed_chunks)
+    
+    who_chunks = chunk_who_data()
+    all_chunks.extend(who_chunks)
+    
     # Save all chunks combined
     save_chunks(all_chunks, "all_chunks.json")
     
@@ -235,6 +274,8 @@ def chunk_all_data():
     print(f"- CounselChat: {len(counselchat_chunks)} chunks")
     print(f"- Reddit: {len(reddit_chunks)} chunks")
     print(f"- Mind.org.uk: {len(mind_chunks)} chunks")
+    print(f"- PubMed: {len(pubmed_chunks)} chunks")
+    print(f"- WHO: {len(who_chunks)} chunks")
     print(f"\nChunks saved to: {CHUNKS_DIR.absolute()}")
     
     # Show sample chunk

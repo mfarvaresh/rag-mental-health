@@ -1,0 +1,21 @@
+{
+  "query": " i am depressed and can not sleep, i don not want to talk to people",
+  "response": "I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who is trained to support you through this. If you are in crisis or have thoughts of harming yourself please seek immediate professional help by calling your local emergency services (such as 911).\n\nIn addition, there might be online resources that can offer some comfort and guidance while waiting for a face-to-face appointment with someone who understands what it's like to feel this way. Websites such as BetterHelp or Talkspace provide access to licensed therapsists via phone calls or text messaging if talking in person is difficult right now, but please remember that these are not replacements for professional help and should only be used when you can’t immediately reach a local provider.\n\nRemember it's okay to seek support from trusted friends or family members too; they care about your wellbeing as much as professionals do. Please take the necessary steps towards seeking assistance, whether that means calling someone close by for immediate comfort or finding professional help in person soon afterward. Your health and safety are of utmost importance.",
+  "contexts": [
+    "[Professional Therapist Response]\nQuestion: I'm very depressed. How do I find someone to talk to? Answer: If there is no one in your life with whom you feel comfortable, I would recommend identifying someone on this site, psychology today or goodtherapy.org who is in your area, then give that therapist a call to see if you would be a good match.",
+    "[Professional Therapist Response]\nQuestion: I'm very depressed. How do I find someone to talk to? Answer: Sorry to hear you are feeling that way. Is there a 24-hour helpline where you are that you can call? Here is a website with some numbers to call: https:psychcentral.comlibcommon-hotline-phone-numbers You could talk to your family doctor and they could help you find a therapist? You could also use this website to find a therapist. https:therapists.psychologytoday.com. I sincerely hope you find someone to talk to.",
+    "[Professional Therapist Response]\nQuestion: I'm very depressed. How do I find someone to talk to? Answer: Hi,Reaching out here is a great start! I recommend looking for somebody in your area that works with people experiencing depression. After you've chosen somebody to try, feel free to call them for a consultation! A lot of counselors and therapists offer free consultations, and remember that your counselor is working for you, so make sure they are a good fit! I hope this has been of some help.",
+    "[Professional Therapist Response]\nQuestion: I'm very depressed. How do I find someone to talk to?\n\nAnswer: You have already taken the brave first step of making the decision to heal from it and find a professional that will help you do so. There are lots of different options nowadays for therapists, as you can see them online or in an office. My biggest tip for you is to use Psychology Today or Counsel Chat to find a therapist. Enter in your zip code and you will find many different therapists you can talk to . Be sure to find someone that you most resonate with and ask them any questions you may have.",
+    "[Professional Therapist Response]\nQuestion: I'm very depressed. How do I find someone to talk to?\n\nAnswer: It's so great that you are reaching out when you feel depressed!If you have insurance, you can call them up and find out who would be in network for you. That means they can tell you what providers or clinics they cover, and if there is a copay or deductible and how much."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 79.283022,
+  "timestamp": "2025-07-15T14:41:12.820816"
+}

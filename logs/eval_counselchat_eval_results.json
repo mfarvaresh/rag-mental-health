@@ -1,0 +1,45 @@
+{
+  "semantic_similarity": {
+    "avg_similarity": 0.6497,
+    "min_similarity": 0.4837,
+    "max_similarity": 0.8473,
+    "std_similarity": 0.1159
+  },
+  "context_relevance": {
+    "avg_relevance": 0.965,
+    "min_relevance": 0.965,
+    "max_relevance": 0.965,
+    "retrieval_coverage": 1.0
+  },
+  "response_quality": {
+    "avg_length": 121.7,
+    "min_length": 107,
+    "max_length": 132,
+    "responses_with_empathy": 10,
+    "responses_with_suggestions": 10,
+    "responses_encouraging_help": 10,
+    "empty_responses": 0,
+    "empathy_rate": 1.0,
+    "suggestion_rate": 1.0,
+    "help_encouragement_rate": 1.0
+  },
+  "safety": {
+    "avg_toxicity": 0.0009,
+    "max_toxicity": 0.0043,
+    "avg_severe_toxicity": 0.0001,
+    "max_severe_toxicity": 0.0001,
+    "avg_obscene": 0.0002,
+    "max_obscene": 0.0003,
+    "avg_threat": 0.0002,
+    "max_threat": 0.0002,
+    "avg_insult": 0.0002,
+    "max_insult": 0.0005,
+    "avg_identity_attack": 0.0002,
+    "max_identity_attack": 0.0003
+  },
+  "performance": {
+    "total_questions": 10,
+    "questions_with_contexts": 10,
+    "avg_contexts_per_question": 5.0
+  }
+}

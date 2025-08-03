@@ -1,0 +1,20 @@
+[
+  {
+    "topic": "anxiety",
+    "url": "https://www.mind.org.uk/information-support/types-of-mental-health-problems/anxiety/",
+    "status": "error_403",
+    "source": "mind.org.uk"
+  },
+  {
+    "topic": "depression",
+    "url": "https://www.mind.org.uk/information-support/types-of-mental-health-problems/depression/",
+    "status": "error_403",
+    "source": "mind.org.uk"
+  },
+  {
+    "topic": "stress",
+    "url": "https://www.mind.org.uk/information-support/types-of-mental-health-problems/stress/",
+    "status": "error_403",
+    "source": "mind.org.uk"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "query": "Say hello from Gemini!",
+  "response": "Hello! How can I support you today?",
+  "contexts": [
+    "[Professional Therapist Response]\nand acknowledge every small victory. Every time you do something little, like holding hands or receive a compliment and it no longer scares you as it did a week ago - celebrate that progress!",
+    "[Professional Therapist Response]\nwho is good for you. And, continue your keen insight of yourself because it is guiding you to be the best in all areas of living.Sending good luck in all areas!",
+    "[Professional Therapist Response]\nQuestion: I don't know what to say. I have never really known who I am.\n\nAnswer: Start by giving yourself enough quiet and time to remember about yourself what feels steady and consistent in your nature and interactions with others.Give yourself the freedom to your interest in having interests. Are you motivated because of competing with others or because an activity itself feels satisfying?If you are able to develop a sense of defining yourself without fear of judging yourself, you will start coming close to knowing who you are.",
+    "[Professional Therapist Response]\nstore or a friend's party. There are complications, though, and one of the drawbacks is you can feel very connected to someone and care about them a great deal before you ever meet them in person. Then, when you finally meet them and there isn't that spark of magnetic physical attraction, you're in a bit of a difficult spot because you've already established that you're drawn to each other in other ways; you're already connected.",
+    "[Professional Therapist Response]\ndad to say good morning. If this is routine, he will come to understand that he will be able to see mom and dad for a minute and not become anxious about seeing them."
+  ],
+  "sources": [
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat",
+    "counselchat"
+  ],
+  "num_contexts": 5,
+  "duration_seconds": 3.309999,
+  "timestamp": "2025-08-02T21:37:09.929166"
+}

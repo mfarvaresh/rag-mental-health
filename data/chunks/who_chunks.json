@@ -1,0 +1,22 @@
+[
+  {
+    "text": "Everyone can feel anxious sometimes, but people with anxiety disorders often experience fear and worry that is both intense and excessive. These feelings are typically accompanied by physical tension and other behavioural and cognitive symptoms. They are difficult to control, cause significant distress and can last a long time if untreated. Anxiety disorders interfere with daily activities and can impair a person’s family, social and school or working life.",
+    "source": "who",
+    "metadata": {
+      "topic": "anxiety-disorders",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders",
+      "chunk_index": 0,
+      "total_chunks": 1
+    }
+  },
+  {
+    "text": "Depressive disorder (also known as depression) is a common mental disorder. It involves a depressed mood or loss of pleasure or interest in activities for long periods of time.",
+    "source": "who",
+    "metadata": {
+      "topic": "depression",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/depression",
+      "chunk_index": 0,
+      "total_chunks": 1
+    }
+  }
+]

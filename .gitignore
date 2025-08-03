@@ -9,16 +9,6 @@ venv/
 ENV/
 .env
 
-# Data (too large for GitHub)
-data/
-*.json
-*.pkl
-*.csv
-
-# Vector Database
-vectordb/
-*.db
-*.parquet
 
 # IDE
 .vscode/
@@ -32,13 +22,13 @@ Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
-*.ipynb
 
-# Logs
-*.log
-logs/
 
 # Model files
 models/
 *.bin
 *.onnx
+# misc
+.DS_Store
+.idea/
+.vscode/
