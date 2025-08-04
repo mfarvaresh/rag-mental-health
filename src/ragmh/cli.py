@@ -9,6 +9,7 @@ from .chunk import chunk_all_data
 from .embed import embed_all_sources
 from .vectordb import build_vectordb, test_search, hybrid_search_vectordb
 from .chains import run_rag_pipeline
+from .vanilla_llm import compare_responses_cli
 
 def setup_logging(verbose: bool = False):
     """Configure logging"""
@@ -55,6 +56,7 @@ def main():
     compare_parser = subparsers.add_parser('compare', help='Compare RAG vs vanilla LLM')
     compare_parser.add_argument('question', nargs='+', help='Question to compare')
     compare_parser.add_argument('--llm', choices=['ollama', 'gpt-3.5-turbo-0125', 'gemini-1.5-flash-8b'], default='ollama', help='LLM to use (ollama, gpt-3.5-turbo-0125, gemini-1.5-flash-8b)')
+    compare_parser.add_argument('--no-save-logs', action='store_true', help='Do not save comparison logs')
     
     # Test command
     test_parser = subparsers.add_parser('test', help='Test the system')
@@ -151,7 +153,22 @@ def main():
         run_rag_pipeline(query, source_filter=args.source, llm=args.llm)
     
     elif args.command == 'compare':
-        print("\n[compare] This feature is currently unavailable. Please update your CLI or re-implement compare_with_vanilla_llm if needed.")
+        query = ' '.join(args.question)
+        print("\n🔬 Comparing RAG vs Vanilla LLM")
+        print("="*60)
+        save_logs = not args.no_save_logs
+        comparison = compare_responses_cli(query, llm=args.llm)
+        if comparison and save_logs:
+            from pathlib import Path
+            import json
+            from datetime import datetime
+            PROJECT_ROOT = Path(__file__).parent.parent.parent
+            LOGS_DIR = PROJECT_ROOT / "data" / "logs"
+            LOGS_DIR.mkdir(parents=True, exist_ok=True)
+            log_file = LOGS_DIR / f"comparison_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            with open(log_file, 'w', encoding='utf-8') as f:
+                json.dump(comparison, f, indent=2)
+            print(f"\n💾 Comparison saved to: {log_file}")
     
     elif args.command == 'test':
         # Test vector search

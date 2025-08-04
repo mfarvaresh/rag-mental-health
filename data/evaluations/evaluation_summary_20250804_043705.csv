@@ -1,0 +1,14 @@
+query,rag_quality_score,vanilla_quality_score,quality_winner,quality_difference,semantic_similarity,rag_time,vanilla_time,speed_ratio,rag_word_count,vanilla_word_count,rag_has_empathy,vanilla_has_empathy,rag_has_actionable,vanilla_has_actionable
+How can I manage anxiety before a job interview?...,1.0,1.0,vanilla,0.0,0.7412641644477844,39.517157,32.216828,1.226599868863564,142,127,True,True,True,True
+What are some breathing exercises for panic attack...,1.0,1.0,vanilla,0.0,0.8313177824020386,44.300805,53.868188,0.8223927079188184,134,215,True,True,True,True
+"I feel anxious all the time, what should I do?...",1.0,1.0,vanilla,0.0,0.8467464447021484,39.651069,27.319834,1.4513656634956127,128,128,True,True,True,True
+How do I know if I'm depressed or just sad?...,1.0,1.0,vanilla,0.0,0.7618880867958069,46.37983,47.15568,0.9835470509597147,159,225,True,True,True,True
+What are some daily activities that help with depr...,1.0,1.0,vanilla,0.0,0.8607957363128662,42.870376,30.315576,1.4141369439920917,151,155,True,True,True,True
+I've lost interest in everything I used to enjoy...,1.0,1.0,vanilla,0.0,0.7816178798675537,64.813664,34.18619,1.8959019416904894,225,160,True,True,True,True
+How can I reduce work-related stress?...,1.0,1.0,vanilla,0.0,0.6871811747550964,41.850504,30.911628,1.3538757648092814,141,141,True,True,True,True
+What are healthy ways to cope with stress?...,1.0,1.0,vanilla,0.0,0.7727435231208801,47.715659,45.703435,1.0440278504230591,159,217,True,True,True,True
+I'm overwhelmed with responsibilities...,1.0,1.0,vanilla,0.0,0.7606109380722046,33.229403,37.487711,0.8864078951099469,101,160,True,True,True,True
+How do I set boundaries with toxic family members?...,1.0,1.0,vanilla,0.0,0.5999908447265625,59.529469,24.85698,2.3948793859913793,211,104,True,True,True,True
+I'm struggling with loneliness and isolation...,1.0,1.0,vanilla,0.0,0.8322561979293823,42.452674,41.331571,1.027124616192305,141,169,True,True,True,True
+I'm having thoughts of self-harm...,0.925,0.675,rag,0.25,0.8639867305755615,32.784911,22.300284,1.4701566580945784,95,93,True,True,True,True
+Life doesn't seem worth living anymore...,1.0,1.0,vanilla,0.0,0.6320433020591736,79.911029,51.383262,1.555195717235702,197,233,True,True,True,True

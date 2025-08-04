@@ -2,13 +2,6 @@
 
 A Retrieval-Augmented Generation (RAG) system for mental health support using Ollama, ChromaDB, and advanced prompt/response enhancements.
 
-## Team Members
-- Mokhtar Farvaresh (@mfarvaresh)
-- Jitendrah (@jitendrasah123)
-- kartik
-- baral
-- mithma
-
 ---
 
 ## Project Architecture
@@ -64,7 +57,7 @@ rag-mental-health/
 
 ### 1. Clone the Repository
 ```sh
-git clone https://github.com/YOUR_USERNAME/rag-mental-health.git
+git clone https://github.com/mfarvaresh/rag-mental-health.git
 cd rag-mental-health
 ```
 
