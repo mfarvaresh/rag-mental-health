@@ -1,38 +1,81 @@
-﻿# RAG Mental Health
+# RAG Mental Health
 
-A Retrieval-Augmented Generation (RAG) system for mental health support using Ollama, ChromaDB, and advanced prompt/response enhancements.
+A Retrieval-Augmented Generation (RAG) system for mental health support using multiple LLM backends (Ollama, OpenAI, Gemini) with advanced prompt engineering and evaluation capabilities.
 
 ---
 
-## Project Architecture
+## Project Architectural Structure
 
 ```
 rag-mental-health/
-├── src/
-│   └── ragmh/
-│        ├── chains.py            # Main RAG pipeline (retrieval, generation, post-processing)
-│        ├── llm.py               # LLM backend abstraction (Ollama, OpenAI, Gemini)
-│        ├── vectordb.py          # ChromaDB vector DB utilities (init, search, hybrid, rerank)
-│        ├── quick_rag_fixes.py   # Drop-in prompt, rerank, and response quality enhancements
-│        ├── cli.py               # Command-line interface (setup, query, chat, etc.)
-│        ├── ingest.py            # Data ingestion (counselchat, reddit, mind.org.uk, etc.)
-│        ├── chunk.py             # Document chunking utilities
-│        ├── embed.py             # Embedding generation and management
-│        ├── config.py            # Centralized configuration
-│        ├── response_quality.py  # (Optional) Extra response post-processing
-│        ├── enhanced_prompts.py  # (Optional) Prompt templates
-│        └── ...                  # Other helpers and __init__.py
-├── data/                        # Data storage (not tracked by git)
-│   ├── chunks/                  # Chunked data
-│   ├── embeddings/              # Embedding files
-│   ├── vectordb/                # ChromaDB persistent storage
-│   └── logs/                    # Query and evaluation logs
-├── tests/
-│   └── eval_pipeline.py         # Evaluation pipeline (semantic similarity, toxicity, etc.)
-├── requirements.txt             # Python dependencies
-├── pyproject.toml               # Poetry/PEP 621 project config
-└── README.md                    # This file
+├── 📄 Configuration & Documentation
+│   ├── README.md                    # Main documentation and usage guide
+│   ├── PROJECT_REVIEW.md            # Technical review and analysis
+│   ├── pyproject.toml               # Project metadata and dependencies
+│   ├── requirements.txt             # Python dependencies
+│   └── .gitignore                   # Git ignore patterns
+│
+├── 🖥️ User Interface
+│   └── app_streamlit.py             # Advanced Streamlit UI (502 lines)
+│
+├── 📊 Data Pipeline
+│   └── data/
+│       ├── �� Raw Data Sources
+│       │   ├── counselchat/         # Professional therapist responses
+│       │   ├── reddit/              # Community discussions
+│       │   ├── mind/                # Mind.org.uk resources
+│       │   ├── pubmed/              # Medical research papers
+│       │   └── who/                 # WHO mental health guidelines
+│       │
+│       ├── 📁 Processed Data
+│       │   ├── chunks/              # Text chunks for RAG
+│       │   ├── embeddings/          # Vector embeddings
+│       │   └── vectordb/            # ChromaDB vector database
+│       │
+│       ├── 📁 Evaluation Data
+│       │   ├── evaluations/         # User evaluations and metrics
+│       │   └── logs/                # Interaction logs
+│       │
+│       └── 📁 Documentation
+│           └── docs/                # Reference documents
+│
+├── 🔧 Core RAG Engine (src/ragmh/)
+│   ├── __init__.py                  # Package exports
+│   ├── __main__.py                  # CLI entry point
+│   │
+│   ├── 🔄 Data Processing
+│   │   ├── ingest.py                # Data ingestion (376 lines)
+│   │   ├── chunk.py                 # Text chunking (306 lines)
+│   │   └── embed.py                 # Embedding generation (242 lines)
+│   │
+│   ├── �� AI/ML Components
+│   │   ├── llm.py                   # LLM backends (167 lines)
+│   │   ├── vanilla_llm.py           # Vanilla LLM comparison (196 lines)
+│   │   └── response_quality.py      # Response quality metrics (22 lines)
+│   │
+│   ├── 🔍 Retrieval & Storage
+│   │   ├── vectordb.py              # ChromaDB operations (342 lines)
+│   │   └── quick_rag_fixes.py      # RAG enhancements (277 lines)
+│   │
+│   ├── ⚡ Core Pipeline
+│   │   ├── chains.py                # Main RAG pipeline (188 lines)
+│   │   └── config.py                # Configuration management (25 lines)
+│   │
+│   ├── ��️ Interface
+│   │   ├── cli.py                   # Command-line interface (217 lines)
+│   │   └── enhanced_prompts.py      # Advanced prompts (0 lines)
+│   │
+│   └── 🧪 Testing & Evaluation
+│       └── tests/
+│           └── eval_pipeline.py     # Automated evaluation (329 lines)
+│
+└── ��️ Utilities
+    └── scripts/
+        ├── build_index.py           # Vector index builder (53 lines)
+        ├── generate_eval_data.py    # Evaluation data generator (344 lines)
+        └── test_improvements.py     # Improvement testing (23 lines)
 ```
+
 
 ### Pipeline Overview
 1. **Ingestion**: Download and preprocess mental health data from multiple sources.
