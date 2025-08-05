@@ -1,11 +1,11 @@
 {
   "model_name": "all-MiniLM-L6-v2",
   "embedding_dim": 384,
-  "num_chunks": 8750,
+  "num_chunks": 8712,
   "sources": {
     "counselchat": 8321,
-    "reddit": 217,
-    "pubmed": 210,
+    "reddit": 210,
+    "pubmed": 179,
     "who": 2
   }
 }

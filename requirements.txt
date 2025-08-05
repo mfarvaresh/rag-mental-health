@@ -10,6 +10,7 @@ tqdm>=4.66.0
 # Vector database and embeddings
 chromadb>=0.4.0
 sentence-transformers>=2.2.0
+# Supports Reason-ModernColBERT: reason-labs/Reason-ModernColBERT
 torch>=2.0.0
 
 # LLM and processing

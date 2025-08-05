@@ -28,6 +28,10 @@ Thumbs.db
 models/
 *.bin
 *.onnx
+
+# Application files
+app_streamlit.py
+
 # misc
 .DS_Store
 .idea/

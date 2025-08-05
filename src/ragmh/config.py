@@ -19,6 +19,7 @@ RAG_CONFIG = {
     },
     "models": {
         "embedding": "all-MiniLM-L6-v2",
+        "embedding_reason": "all-mpnet-base-v2",  # Enhanced reasoning model (alternative to Reason-ModernColBERT)
         "reranking": "cross-encoder/ms-marco-MiniLM-L-6-v2",
         "llm": "ollama"  # or "gpt-3.5-turbo-0125"
     }

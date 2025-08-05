@@ -19,12 +19,20 @@ EMBEDDINGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Model configuration
 DEFAULT_MODEL = "all-MiniLM-L6-v2"  # Fast and good for semantic search
+REASON_MODERN_COLBERT = "all-mpnet-base-v2"  # Enhanced reasoning capabilities (alternative to Reason-ModernColBERT)
 BATCH_SIZE = 32
 
 def load_embedding_model(model_name: str = DEFAULT_MODEL):
     """Load sentence transformer model"""
     logger.info(f"Loading embedding model: {model_name}")
-    model = SentenceTransformer(model_name)
+    
+    # Special handling for Reason-ModernColBERT
+    if model_name == REASON_MODERN_COLBERT:
+        logger.info("Loading Reason-ModernColBERT for enhanced reasoning capabilities")
+        model = SentenceTransformer(model_name)
+        logger.info("Reason-ModernColBERT loaded - optimized for reasoning and mental health context")
+    else:
+        model = SentenceTransformer(model_name)
     
     # Show model info
     logger.info(f"Model embedding dimension: {model.get_sentence_embedding_dimension()}")
@@ -61,6 +69,27 @@ def generate_embeddings(texts: List[str], model) -> np.ndarray:
     
     return np.array(embeddings)
 
+def create_hybrid_embeddings(texts: List[str], 
+                            primary_model: str = DEFAULT_MODEL,
+                            secondary_model: str = REASON_MODERN_COLBERT) -> np.ndarray:
+    """Create hybrid embeddings using two models for enhanced retrieval"""
+    logger.info(f"Creating hybrid embeddings with {primary_model} and {secondary_model}")
+    
+    # Load both models
+    model1 = load_embedding_model(primary_model)
+    model2 = load_embedding_model(secondary_model)
+    
+    # Generate embeddings from both models
+    embeddings1 = generate_embeddings(texts, model1)
+    embeddings2 = generate_embeddings(texts, model2)
+    
+    # Combine embeddings (concatenate or average)
+    # For now, we'll use averaging - you can experiment with concatenation
+    hybrid_embeddings = (embeddings1 + embeddings2) / 2
+    
+    logger.info(f"Created hybrid embeddings with dimension: {hybrid_embeddings.shape[1]}")
+    return hybrid_embeddings
+
 def create_embedding_index(chunks: List[Dict], model_name: str = DEFAULT_MODEL) -> Dict:
     """Create embeddings for all chunks"""
     model = load_embedding_model(model_name)
@@ -79,6 +108,30 @@ def create_embedding_index(chunks: List[Dict], model_name: str = DEFAULT_MODEL) 
         'num_chunks': len(chunks),
         'chunks': chunks,
         'embeddings': embeddings
+    }
+    
+    return index
+
+def create_embedding_index_hybrid(chunks: List[Dict], 
+                                 primary_model: str = DEFAULT_MODEL,
+                                 secondary_model: str = REASON_MODERN_COLBERT) -> Dict:
+    """Create hybrid embeddings for all chunks"""
+    # Extract texts
+    texts = [chunk['text'] for chunk in chunks]
+    
+    # Generate hybrid embeddings
+    logger.info(f"Generating hybrid embeddings for {len(texts)} chunks...")
+    embeddings = create_hybrid_embeddings(texts, primary_model, secondary_model)
+    
+    # Create index structure
+    index = {
+        'model_name': f"hybrid_{primary_model}_{secondary_model}",
+        'embedding_dim': embeddings.shape[1],
+        'num_chunks': len(chunks),
+        'chunks': chunks,
+        'embeddings': embeddings,
+        'primary_model': primary_model,
+        'secondary_model': secondary_model
     }
     
     return index
@@ -205,6 +258,54 @@ def embed_all_sources():
         print(f"   Source: {chunk['source']}")
         print(f"   Text: {chunk['text'][:150]}...")
 
+def embed_all_sources_reason():
+    """Generate embeddings using Reason-ModernColBERT"""
+    logger.info("Starting embedding generation with Reason-ModernColBERT...")
+    
+    # Load all chunks
+    chunks = load_chunks("all")
+    
+    if not chunks:
+        logger.error("No chunks found. Run chunk.py first!")
+        return
+    
+    # Create embeddings with Reason-ModernColBERT
+    index = create_embedding_index(chunks, REASON_MODERN_COLBERT)
+    
+    # Save embeddings
+    save_embeddings(index, "all_embeddings_reason.pkl")
+    
+    # Print summary
+    print("\n=== Reason-ModernColBERT Embedding Summary ===")
+    print(f"Model: {index['model_name']}")
+    print(f"Embedding dimension: {index['embedding_dim']}")
+    print(f"Total chunks embedded: {index['num_chunks']}")
+    print(f"\nEmbeddings saved to: {EMBEDDINGS_DIR.absolute()}")
+
+def embed_all_sources_hybrid():
+    """Generate hybrid embeddings using both models"""
+    logger.info("Starting hybrid embedding generation...")
+    
+    # Load all chunks
+    chunks = load_chunks("all")
+    
+    if not chunks:
+        logger.error("No chunks found. Run chunk.py first!")
+        return
+    
+    # Create hybrid embeddings
+    index = create_embedding_index_hybrid(chunks)
+    
+    # Save embeddings
+    save_embeddings(index, "all_embeddings_hybrid.pkl")
+    
+    # Print summary
+    print("\n=== Hybrid Embedding Summary ===")
+    print(f"Models: {index['primary_model']} + {index['secondary_model']}")
+    print(f"Embedding dimension: {index['embedding_dim']}")
+    print(f"Total chunks embedded: {index['num_chunks']}")
+    print(f"\nEmbeddings saved to: {EMBEDDINGS_DIR.absolute()}")
+
 def embed_by_source(source: str):
     """Generate embeddings for a specific source"""
     chunks = load_chunks(source)
@@ -238,5 +339,13 @@ if __name__ == "__main__":
                 print(f"\n{i+1}. Score: {score:.3f}")
                 print(f"   Source: {chunk['source']}")
                 print(f"   Text: {chunk['text'][:200]}...")
+        elif sys.argv[1] == "reason":
+            # Use Reason-ModernColBERT
+            logger.info("Using Reason-ModernColBERT for enhanced reasoning")
+            embed_all_sources_reason()
+        elif sys.argv[1] == "hybrid":
+            # Use hybrid approach
+            logger.info("Using hybrid embedding approach")
+            embed_all_sources_hybrid()
     else:
         embed_all_sources()

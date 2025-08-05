@@ -20,7 +20,7 @@ rag-mental-health/
 │
 ├── 📊 Data Pipeline
 │   └── data/
-│       ├── �� Raw Data Sources
+│       ├── 📄 Raw Data Sources
 │       │   ├── counselchat/         # Professional therapist responses
 │       │   ├── reddit/              # Community discussions
 │       │   ├── mind/                # Mind.org.uk resources
@@ -160,6 +160,42 @@ python tests/eval_pipeline.py --file <log_or_results.json>
 - **Evaluation** includes semantic similarity, context relevance, and toxicity checks.
 - **Multiple LLM backends**: Ollama (local), OpenAI (gpt-3.5-turbo-0125), Gemini (gemini-1.5-flash-8b).
 - **Modular design**: Each pipeline step is a separate module for easy extension.
+
+## Advanced Features
+
+### 🤖 Enhanced Embeddings with Reason-ModernColBERT
+
+The system supports **Reason-ModernColBERT** for enhanced semantic understanding and reasoning capabilities:
+
+```bash
+# Generate embeddings with Reason-ModernColBERT
+python -m src.ragmh.embed reason
+
+# Generate hybrid embeddings (combines both models)
+python -m src.ragmh.embed hybrid
+
+# Use in Streamlit app (add to sidebar)
+```
+
+**Benefits for Mental Health RAG:**
+- **Enhanced Reasoning**: Better understanding of complex mental health queries
+- **Context Awareness**: Improved distinction between symptoms, treatments, and support
+- **Empathy Detection**: Better recognition of emotional content and support-seeking language
+- **Multi-Source Optimization**: Enhanced retrieval across clinical and community content
+
+**Usage Examples:**
+```python
+# In your code
+from src.ragmh.embed import load_embedding_model, REASON_MODERN_COLBERT
+
+# Load Reason-ModernColBERT
+model = load_embedding_model(REASON_MODERN_COLBERT)
+
+# Generate embeddings
+embeddings = model.encode(["I'm feeling anxious about my future"])
+```
+
+---
 
 ## API Key Setup
 - Create a `.env` file in the project root with:

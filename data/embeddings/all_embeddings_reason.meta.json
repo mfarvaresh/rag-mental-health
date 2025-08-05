@@ -1,0 +1,11 @@
+{
+  "model_name": "all-mpnet-base-v2",
+  "embedding_dim": 768,
+  "num_chunks": 8750,
+  "sources": {
+    "counselchat": 8321,
+    "reddit": 217,
+    "pubmed": 210,
+    "who": 2
+  }
+}
