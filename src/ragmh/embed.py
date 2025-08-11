@@ -1,4 +1,3 @@
-"""Generate embeddings for text chunks using sentence-transformers"""
 import json
 import numpy as np
 from pathlib import Path
@@ -10,98 +9,71 @@ import pickle
 
 logger = logging.getLogger(__name__)
 
-# Project paths
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 CHUNKS_DIR = DATA_DIR / "chunks"
 EMBEDDINGS_DIR = DATA_DIR / "embeddings"
 EMBEDDINGS_DIR.mkdir(parents=True, exist_ok=True)
 
-# Model configuration
-DEFAULT_MODEL = "all-MiniLM-L6-v2"  # Fast and good for semantic search
-REASON_MODERN_COLBERT = "all-mpnet-base-v2"  # Enhanced reasoning capabilities (alternative to Reason-ModernColBERT)
+DEFAULT_MODEL = "all-MiniLM-L6-v2"
+REASON_MODERN_COLBERT = "all-mpnet-base-v2"
 BATCH_SIZE = 32
 
 def load_embedding_model(model_name: str = DEFAULT_MODEL):
-    """Load sentence transformer model"""
+    """Load sentence transformer model."""
     logger.info(f"Loading embedding model: {model_name}")
-    
-    # Special handling for Reason-ModernColBERT
     if model_name == REASON_MODERN_COLBERT:
         logger.info("Loading Reason-ModernColBERT for enhanced reasoning capabilities")
         model = SentenceTransformer(model_name)
         logger.info("Reason-ModernColBERT loaded - optimized for reasoning and mental health context")
     else:
         model = SentenceTransformer(model_name)
-    
-    # Show model info
     logger.info(f"Model embedding dimension: {model.get_sentence_embedding_dimension()}")
     logger.info(f"Max sequence length: {model.max_seq_length}")
-    
     return model
 
 def load_chunks(source: str = "all") -> List[Dict]:
-    """Load chunks from JSON files"""
+    """Load chunks from JSON files."""
     if source == "all":
         chunk_file = CHUNKS_DIR / "all_chunks.json"
     else:
         chunk_file = CHUNKS_DIR / f"{source}_chunks.json"
-    
     if not chunk_file.exists():
         logger.error(f"Chunk file not found: {chunk_file}")
         return []
-    
     with open(chunk_file, 'r', encoding='utf-8') as f:
         chunks = json.load(f)
-    
     logger.info(f"Loaded {len(chunks)} chunks from {chunk_file.name}")
     return chunks
 
 def generate_embeddings(texts: List[str], model) -> np.ndarray:
-    """Generate embeddings for a list of texts"""
-    # Process in batches for efficiency
+    """Generate embeddings for a list of texts."""
     embeddings = []
-    
     for i in tqdm(range(0, len(texts), BATCH_SIZE), desc="Generating embeddings"):
         batch = texts[i:i + BATCH_SIZE]
         batch_embeddings = model.encode(batch, show_progress_bar=False)
         embeddings.extend(batch_embeddings)
-    
     return np.array(embeddings)
 
 def create_hybrid_embeddings(texts: List[str], 
                             primary_model: str = DEFAULT_MODEL,
                             secondary_model: str = REASON_MODERN_COLBERT) -> np.ndarray:
-    """Create hybrid embeddings using two models for enhanced retrieval"""
+    """Create hybrid embeddings using two models."""
     logger.info(f"Creating hybrid embeddings with {primary_model} and {secondary_model}")
-    
-    # Load both models
     model1 = load_embedding_model(primary_model)
     model2 = load_embedding_model(secondary_model)
-    
-    # Generate embeddings from both models
     embeddings1 = generate_embeddings(texts, model1)
     embeddings2 = generate_embeddings(texts, model2)
-    
-    # Combine embeddings (concatenate or average)
-    # For now, we'll use averaging - you can experiment with concatenation
     hybrid_embeddings = (embeddings1 + embeddings2) / 2
-    
     logger.info(f"Created hybrid embeddings with dimension: {hybrid_embeddings.shape[1]}")
     return hybrid_embeddings
 
 def create_embedding_index(chunks: List[Dict], model_name: str = DEFAULT_MODEL) -> Dict:
-    """Create embeddings for all chunks"""
+    """Create embeddings for all chunks."""
     model = load_embedding_model(model_name)
-    
-    # Extract texts
     texts = [chunk['text'] for chunk in chunks]
-    
-    # Generate embeddings
     logger.info(f"Generating embeddings for {len(texts)} chunks...")
     embeddings = generate_embeddings(texts, model)
-    
-    # Create index structure
     index = {
         'model_name': model_name,
         'embedding_dim': embeddings.shape[1],
@@ -109,21 +81,15 @@ def create_embedding_index(chunks: List[Dict], model_name: str = DEFAULT_MODEL) 
         'chunks': chunks,
         'embeddings': embeddings
     }
-    
     return index
 
 def create_embedding_index_hybrid(chunks: List[Dict], 
                                  primary_model: str = DEFAULT_MODEL,
                                  secondary_model: str = REASON_MODERN_COLBERT) -> Dict:
-    """Create hybrid embeddings for all chunks"""
-    # Extract texts
+    """Create hybrid embeddings for all chunks."""
     texts = [chunk['text'] for chunk in chunks]
-    
-    # Generate hybrid embeddings
     logger.info(f"Generating hybrid embeddings for {len(texts)} chunks...")
     embeddings = create_hybrid_embeddings(texts, primary_model, secondary_model)
-    
-    # Create index structure
     index = {
         'model_name': f"hybrid_{primary_model}_{secondary_model}",
         'embedding_dim': embeddings.shape[1],
@@ -133,83 +99,60 @@ def create_embedding_index_hybrid(chunks: List[Dict],
         'primary_model': primary_model,
         'secondary_model': secondary_model
     }
-    
     return index
 
 def save_embeddings(index: Dict, filename: str):
-    """Save embeddings and metadata"""
+    """Save embeddings and metadata."""
     output_path = EMBEDDINGS_DIR / filename
-    
-    # Save as pickle for numpy arrays
     with open(output_path, 'wb') as f:
         pickle.dump(index, f)
-    
     logger.info(f"Saved embeddings to {output_path}")
-    
-    # Also save metadata as JSON for inspection
     metadata = {
         'model_name': index['model_name'],
         'embedding_dim': index['embedding_dim'],
         'num_chunks': index['num_chunks'],
         'sources': {}
     }
-    
-    # Count chunks by source
     for chunk in index['chunks']:
         source = chunk['source']
         metadata['sources'][source] = metadata['sources'].get(source, 0) + 1
-    
     metadata_path = output_path.with_suffix('.meta.json')
     with open(metadata_path, 'w') as f:
         json.dump(metadata, f, indent=2)
 
 def load_embeddings(filename: str) -> Dict:
-    """Load embeddings from file"""
+    """Load embeddings from file."""
     input_path = EMBEDDINGS_DIR / filename
-    
     with open(input_path, 'rb') as f:
         index = pickle.load(f)
-    
     logger.info(f"Loaded embeddings from {input_path}")
     return index
 
 def compute_similarity(query_embedding: np.ndarray, 
                       corpus_embeddings: np.ndarray) -> np.ndarray:
-    """Compute cosine similarity between query and corpus"""
-    # Normalize embeddings
+    """Compute cosine similarity between query and corpus."""
     query_norm = query_embedding / np.linalg.norm(query_embedding)
     corpus_norm = corpus_embeddings / np.linalg.norm(corpus_embeddings, axis=1, keepdims=True)
-    
-    # Compute cosine similarity
     similarities = np.dot(corpus_norm, query_norm)
-    
     return similarities
 
 def search_embeddings(query: str, 
                      index: Dict, 
                      top_k: int = 5) -> List[Tuple[Dict, float]]:
-    """Search for similar chunks using embeddings"""
+    """Search for similar chunks using embeddings."""
     model = load_embedding_model(index['model_name'])
-    
-    # Encode query
     query_embedding = model.encode([query])[0]
-    
-    # Compute similarities
     similarities = compute_similarity(query_embedding, index['embeddings'])
-    
-    # Get top k results
     top_indices = np.argsort(similarities)[::-1][:top_k]
-    
     results = []
     for idx in top_indices:
         chunk = index['chunks'][idx]
         score = float(similarities[idx])
         results.append((chunk, score))
-    
     return results
 
 def embed_pubmed_and_who():
-    """Generate embeddings for PubMed and WHO chunks"""
+    """Generate embeddings for PubMed and WHO chunks."""
     for source in ["pubmed", "who"]:
         chunks = load_chunks(source)
         if not chunks:
@@ -220,37 +163,23 @@ def embed_pubmed_and_who():
         logger.info(f"Created embeddings for {source}: {len(chunks)} chunks")
 
 def embed_all_sources():
-    """Generate embeddings for all data sources"""
+    """Generate embeddings for all data sources."""
     logger.info("Starting embedding generation...")
-    
-    # Load all chunks
     chunks = load_chunks("all")
-    
     if not chunks:
         logger.error("No chunks found. Run chunk.py first!")
         return
-    
-    # Create embeddings
     index = create_embedding_index(chunks)
-    
-    # Save embeddings
     save_embeddings(index, "all_embeddings.pkl")
-    
-    # Also embed PubMed and WHO individually
     embed_pubmed_and_who()
-    
-    # Print summary
     print("\n=== Embedding Summary ===")
     print(f"Model: {index['model_name']}")
     print(f"Embedding dimension: {index['embedding_dim']}")
     print(f"Total chunks embedded: {index['num_chunks']}")
     print(f"\nEmbeddings saved to: {EMBEDDINGS_DIR.absolute()}")
-    
-    # Test search
     print("\n=== Testing Search ===")
     test_query = "how to deal with anxiety"
     results = search_embeddings(test_query, index, top_k=3)
-    
     print(f"\nQuery: '{test_query}'")
     print("\nTop 3 results:")
     for i, (chunk, score) in enumerate(results):
@@ -259,23 +188,14 @@ def embed_all_sources():
         print(f"   Text: {chunk['text'][:150]}...")
 
 def embed_all_sources_reason():
-    """Generate embeddings using Reason-ModernColBERT"""
+    """Generate embeddings using Reason-ModernColBERT."""
     logger.info("Starting embedding generation with Reason-ModernColBERT...")
-    
-    # Load all chunks
     chunks = load_chunks("all")
-    
     if not chunks:
         logger.error("No chunks found. Run chunk.py first!")
         return
-    
-    # Create embeddings with Reason-ModernColBERT
     index = create_embedding_index(chunks, REASON_MODERN_COLBERT)
-    
-    # Save embeddings
     save_embeddings(index, "all_embeddings_reason.pkl")
-    
-    # Print summary
     print("\n=== Reason-ModernColBERT Embedding Summary ===")
     print(f"Model: {index['model_name']}")
     print(f"Embedding dimension: {index['embedding_dim']}")
@@ -283,23 +203,14 @@ def embed_all_sources_reason():
     print(f"\nEmbeddings saved to: {EMBEDDINGS_DIR.absolute()}")
 
 def embed_all_sources_hybrid():
-    """Generate hybrid embeddings using both models"""
+    """Generate hybrid embeddings using both models."""
     logger.info("Starting hybrid embedding generation...")
-    
-    # Load all chunks
     chunks = load_chunks("all")
-    
     if not chunks:
         logger.error("No chunks found. Run chunk.py first!")
         return
-    
-    # Create hybrid embeddings
     index = create_embedding_index_hybrid(chunks)
-    
-    # Save embeddings
     save_embeddings(index, "all_embeddings_hybrid.pkl")
-    
-    # Print summary
     print("\n=== Hybrid Embedding Summary ===")
     print(f"Models: {index['primary_model']} + {index['secondary_model']}")
     print(f"Embedding dimension: {index['embedding_dim']}")
@@ -307,44 +218,34 @@ def embed_all_sources_hybrid():
     print(f"\nEmbeddings saved to: {EMBEDDINGS_DIR.absolute()}")
 
 def embed_by_source(source: str):
-    """Generate embeddings for a specific source"""
+    """Generate embeddings for a specific source."""
     chunks = load_chunks(source)
-    
     if not chunks:
         logger.error(f"No chunks found for {source}")
         return
-    
     index = create_embedding_index(chunks)
     save_embeddings(index, f"{source}_embeddings.pkl")
-    
     logger.info(f"Created embeddings for {source}: {len(chunks)} chunks")
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    
     import sys
-    
     if len(sys.argv) > 1:
         if sys.argv[1] in ["counselchat", "reddit", "mind"]:
             embed_by_source(sys.argv[1])
         elif sys.argv[1] == "test":
-            # Test search functionality
             index = load_embeddings("all_embeddings.pkl")
             query = input("Enter search query: ")
             results = search_embeddings(query, index)
-            
             print(f"\nResults for: '{query}'")
             for i, (chunk, score) in enumerate(results):
                 print(f"\n{i+1}. Score: {score:.3f}")
                 print(f"   Source: {chunk['source']}")
                 print(f"   Text: {chunk['text'][:200]}...")
         elif sys.argv[1] == "reason":
-            # Use Reason-ModernColBERT
             logger.info("Using Reason-ModernColBERT for enhanced reasoning")
             embed_all_sources_reason()
         elif sys.argv[1] == "hybrid":
-            # Use hybrid approach
             logger.info("Using hybrid embedding approach")
             embed_all_sources_hybrid()
     else:

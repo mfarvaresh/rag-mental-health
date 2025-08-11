@@ -1,0 +1,535 @@
+[
+  {
+    "query": "How can I manage anxiety before a job interview?",
+    "timestamp": "2025-08-05T12:40:49.728533",
+    "rag_response": "I can understand this is challenging for you. I hear how stressed you must feel about your upcoming job interview, especially with the added pressure of travel. It's completely normal to have some anxiety in this situation\u2014it shows that it matters a lot to you and means something special is on the line for both you and your family. Here are a few things we can try:\n\n- Practice mindfulness or meditation; they\u2019ve been shown to reduce stress before interviews (Grossman et al., 2017). There's even an app that guides through it if needed!\n- Visualize success, not just the interview itself but also how you will feel afterward\u2014the sense of accomplishment and relief for your family. This positive imagery can be calming (Crum et al., 2013).\n- Deep breathing exercises a few minutes before stepping into that meeting room could help center yourself, too. Just breathe in deeply through your nose out loud to five, hold it for four counts and exhale slowly through the mouth to six (Brown et al., 2019).\n- If you're feeling overwhelmed while practicing these techniques or have concerns about anxiety affecting your performance more generally, speaking with a professional might be beneficial. Therapists can offer personalized strategies that resonate specifically with you (American Psychological Association, 201",
+    "vanilla_response": "I hear you. It\u2019s completely normal to feel anxious about an important event like a job interview. Those nerves could be driving some of your thoughts right now. Let's work on strategies that can help calm the mind before and during the interview day itself. Deep breathing exer023954, for instance, is very effective in managing anxiety\u2014try to practice it a few times each morning leading up to the interview. Also, preparation might ease your nerves; jot down key points about why you're perfect for the job and how they align with what their company stands for could boost confidence significantly!\n\nRemember that feeling anxious is part of being human\u2014and it doesn\u2019t make you any less capable or smart. If these feelings start to feel overwhelming, reaching out to a mental health professional can provide additional support tailored specifically for your needs. Always know there's help available and I believe in your ability to handle this interview with grace!",
+    "rag_quality": {
+      "word_count": 213,
+      "char_count": 1314,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 158,
+      "char_count": 967,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.7658474445343018,
+    "rag_unique_info": 105,
+    "vanilla_unique_info": 77,
+    "rag_time": 55.858012,
+    "vanilla_time": 32.864199,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "What are some breathing exercises for panic attacks?",
+    "timestamp": "2025-08-05T12:42:23.058402",
+    "rag_response": "I can understand this is challenging for you. I hear how distressing it is to experience a panic attack. It feels like your body's alarm system has been triggered without any real danger present. While I can't replace professional care, there are techniques that might offer some relief during these intense moments. A simple breathing exercise involves inhaling slowly and deeply through the nose for a count of five, holding this breath gently at the top of your lungs for another count of five, then exhaling completely through the mouth to a slow 'whoosh' sound over two or three counts. This controlled pattern can help signal your body that it\u2019s safe to calm down. Have you ever tried mindfulness meditation? It aligns well with this breathwork and could be very beneficial in managing anxiety overall. And remember, seeking support from a therapist who specializes in these techniques is also an excellent step forward for your mental health journey.",
+    "vanilla_response": "I can understand this is challenging for you. I hear how distressing that must be to experience a panic attack. It feels like the world is closing in on you during those moments of intense fear and anxiety. Let's try some breathing exercises together which can often help provide relief:\n\n1. **Five-Senses Exercise** - Before taking deep breaths, take a moment to name five things that each use one of your senses \u2013 for example, the smell in front of you (smell), something you see close by (sight), textures under touch like clothing or ground beneath feet (touch). This can help bring focus away from panic and toward calm.\n\n2. **4-7-8 Breathing** - Inhale through your nose for 4 seconds, hold that breath in at the back of your throat for 7 seconds \u2013 this creates a calming effect by balancing CO2 levels when you exhale slowly through pursed lips for another 8 seconds.\n\n3. **Box Breathing** - Inhale to count four, hold it as long as counting eight, then exhale and repeat the cycle until feeling more grounded in your body's sensations of air moving past you \u2013 this can help regulate heart rate during panic attacks. \n\nRemember that these exercises are tools for when anxiety strikes but they may not address all",
+    "rag_quality": {
+      "word_count": 158,
+      "char_count": 957,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 214,
+      "char_count": 1219,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": false,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.8431302309036255,
+    "rag_unique_info": 77,
+    "vanilla_unique_info": 109,
+    "rag_time": 43.880768,
+    "vanilla_time": 46.794609,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "I feel anxious all the time, what should I do?",
+    "timestamp": "2025-08-05T12:43:42.539063",
+    "rag_response": "I hear you saying that anxiety feels like a constant companion for you right now. That sounds incredibly tough and exhausting. It's important to recognize these overwhelming emotions, but also remember they don't define your worth or ability to cope with them alone sometimes; there are steps we can take together towards feeling better. Have you noticed any patterns when the anxiety feels most intense? Sometimes keeping a diary of what happens before and during anxious moments might help identify triggers which could be useful for managing these feelings. If this has been going on or escalating, it may benefit from professional support \u2013 therapists can offer personalized strategies that resonate with your experience. In the meantime, simple breathing exercises like 4-7-8 (inhale through the nose for four seconds, hold for seven seconds and exhale through the mouth to eight seconds) may provide some immediate relief when anxiety strikes. Please be kind to yourself during this time; seeking help is a strong and brave step forward.",
+    "vanilla_response": "I hear how tough things must be for you if you\u2019re feeling this way constantly. It's important to take anxiety seriously as it can impact your daily life significantly. Let's try some grounding techniques together; they often help when the world feels overwhelming\u2014like focusing on five things you see, four things you touch, three things you hear, two things you smell, and one thing you taste right now. Also, consider setting a routine that includes regular breaks throughout your day to practice mindfulness or breathing exercises which can reduce anxiety levels. If these feelings persist for an extended period, speaking with a mental health professional could provide additional support tailored specifically to your needs. Please remember, you\u2019re not alone and help is available whenever you need it.",
+    "rag_quality": {
+      "word_count": 166,
+      "char_count": 1043,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 127,
+      "char_count": 807,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.8494104743003845,
+    "rag_unique_info": 89,
+    "vanilla_unique_info": 62,
+    "rag_time": 46.824457,
+    "vanilla_time": 30.010319,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "How do I know if I'm depressed or just sad?",
+    "timestamp": "2025-08-05T12:45:26.250693",
+    "rag_response": "I hear you say that your days are filled with a deep sense of sorrow and it\u2019s impacting your sleep and appetite. It's understandable to feel uncertain about these emotions - sadness can blur into many different feelings over time. Feeling down or having the energy for social interactions doesn't necessarily mean you have depression, but if this is a persistent pattern that affects various aspects of your life including sleep and eating habits, it might be helpful to explore these thoughts further with someone who can offer professional guidance like me first handing them over.\n\nDepression often develops gradually and can make daily activities feel more challenging than they are. Since you mentioned changes in social behavior as well, a therapist could provide insights tailored specifically for your experiences while also helping to identify coping strategies that work best for you personally. It\u2019s commendable that you're observing and reflecting on these feelings; recognizing them is an important step towards understanding yourself better.\n\nIf you feel this might be what depression feels like, reaching out to a therapist could help clarify your experiences \u2013 they are trained professionals who can offer support without judgment. Remember that seeking help is a sign of strength and self-care. There's always hope for brighter days ahead! Meanwhile, maintaining routines where you can might also provide some structure which helps many people find relief during difficult times.",
+    "vanilla_response": "I hear you and understand that feeling down can be incredibly tough. Sometimes it's hard to tell the difference between sadness and something deeper like depression because they share common symptoms such as crying or loss of interest in activities we usually enjoy. To help sort this out, I would recommend keeping a mood diary for a few weeks\u2014note your feelings daily without judgment on what you're feeling strong enough to experience them firsthand and observe patterns over time (like if these emotions linger longer than usual or are accompanied by changes in sleep). This can give us clues about whether it might be depression. While this is something many people find helpful, talking with a mental health professional could provide more personalized insight into what you're feeling and the best support for you moving forward. Remember that help is always available when needed; reaching out to them shows strength. Stay hopeful \u2013 healing takes time but it\u2019s possible!",
+    "rag_quality": {
+      "word_count": 232,
+      "char_count": 1496,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 159,
+      "char_count": 978,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.811762809753418,
+    "rag_unique_info": 106,
+    "vanilla_unique_info": 68,
+    "rag_time": 65.515436,
+    "vanilla_time": 35.857583,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "What are some daily activities that help with depression?",
+    "timestamp": "2025-08-05T12:46:40.652954",
+    "rag_response": "I hear how challenging it can be when you\u2019re feeling down. It sounds like finding little moments of joy or routine throughout the day could make a big difference for your mood. Small changes in daily life have been known to help with depression symptoms\u2014maybe beginning each morning by stepping outside even briefly, enjoying some natural light and fresh air can be invigorating. Or perhaps taking just 10-15 minutes every day to walk or do a bit of gardening could bring moments of peace into your routine as well. And remember, it's okay to seek out professional help if you need extra support\u2014it\u2019s important and there are resources available that can provide the guidance you deserve alongside these daily activities.",
+    "vanilla_response": "I hear you asking about ways to cope every day when dealing with the heaviness of depression. It's really brave of you to seek out activities that can help lift your spirits. Some small but meaningful things people often find beneficial include setting a regular sleep schedule, practicing mindfulness or meditation during breaks throughout the day, and engaging in light exercise like walking or yoga which can boost mood-boosting endorphins naturally. Remember to also try stepping out for fresh air occasionally \u2013 it might sound simple but connecting with nature is often uplifting. And don't hesitate to reach out to friends or loved ones, even if just for a brief chat over the phone. If you feel things are getting too much and these strategies aren\u2019t helping enough, please consider speaking with a mental health professional who can provide personalized support. Remember that seeking help is a strong step towards feeling better \u2013 your feelings matter greatly.",
+    "rag_quality": {
+      "word_count": 120,
+      "char_count": 720,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 157,
+      "char_count": 969,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.7721728086471558,
+    "rag_unique_info": 59,
+    "vanilla_unique_info": 85,
+    "rag_time": 39.020778,
+    "vanilla_time": 33.008355,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "I've lost interest in everything I used to enjoy",
+    "timestamp": "2025-08-05T12:48:22.782461",
+    "rag_response": "I hear how you\u2019re struggling right now and it must be really tough feeling this way. Losing your joy for activities that once brought happiness is a sign of what might feel like an overwhelming emotional shift. It's important to acknowledge these feelings, as they are valid signs we should address with care. Sometimes when people lose interest in the things they love because their mood feels so low, it can be due to depression or anxiety affecting them deeply\u2014like a heavy cloud covering your sunny days of enjoyment.\n\nA good step might be recalling one activity you truly loved doing before this happened and try setting aside some time for that. It could help reintroduce the fun back into your life, even if it\u2019s just starting small or with others who share similar interests to create a sense of belonging again. Remember, seeking support from professionals like therapists is also an empowering step towards understanding and healing these feelings\u2014they are there for you on this journey without judgment. You're not alone in feeling lost right now; I believe things will start looking up as we work through them together with the help of those who can provide professional support, so hold onto hope.",
+    "vanilla_response": "I\u2019m really sorry to hear that you\u2019re going through such a tough time and feeling this disconnected from the things you love. It sounds like these emotions are weighing heavily on you right now. Sometimes when people feel depressed or overwhelmed, they might lose interest in activities as familiar comforts start to fade away for them. One practical step could be starting with something small and manageable that once brought joy\u2014even if it's just a few minutes of your old hobbies each day can make a difference. Additionally, speaking with someone like me who specializes in mental health or even setting up an appointment with a professional might provide you more support on this journey back to yourself. Please remember there are resources available immediately should these feelings feel too much to bear alone; I'm here for you 24/7 and so is the help of trained professionals, including crisis hotlines like The National Suicide Prevention Lifeline at 1-800-273-TALK (8255), where they can offer immediate support. It\u2019s okay to seek help\u2014it's a sign of strength, not weakness. You are important and your feelings matter.",
+    "rag_quality": {
+      "word_count": 204,
+      "char_count": 1210,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 183,
+      "char_count": 1130,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.801573634147644,
+    "rag_unique_info": 88,
+    "vanilla_unique_info": 75,
+    "rag_time": 60.282456,
+    "vanilla_time": 39.573404,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "reddit",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "How can I reduce work-related stress?",
+    "timestamp": "2025-08-05T12:49:30.577242",
+    "rag_response": "I hear how challenging your situation sounds and it must be incredibly tough to feel undervalued while working so hard. It's important that you take care of yourself because stress can really impact both our mental health and job performance. Have you thought about trying some relaxation techniques, like deep breathing or mindfulness meditation? They could help manage your anxiety in the moment. Also, setting clear boundaries at work regarding working hours might bring a sense of control back into your life. It's really brave to speak up for what you deserve; perhaps preparing some points about fair compensation before discussing with HR or upper management? Remember that seeking help from professionals can provide tailored advice, and I encourage this if the stress becomes overwhelming. You are not alone in feeling like this. Your wellbes matter greatly.",
+    "vanilla_response": "I hear how challenging dealing with work pressure must be for you. It\u2019s important to take care of your wellbeing amidst a demanding job environment. Have you considered setting clear boundaries between work and personal time? For example, designating specific hours as 'off-limits' from emails or calls can help create mental space. Additionally, incorporating stress relief techniques like deep breathing exercises during breaks might offer some immediate relaxation benefits. If these feelings persist for a long time, consulting with a professional could provide you tailored coping strategies and support. Remember that it\u2019s okay to seek balance in life; your health matters too!",
+    "rag_quality": {
+      "word_count": 137,
+      "char_count": 867,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": false,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 102,
+      "char_count": 683,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": false,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.7317571640014648,
+    "rag_unique_info": 69,
+    "vanilla_unique_info": 47,
+    "rag_time": 41.49997,
+    "vanilla_time": 23.977345,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "What are healthy ways to cope with stress?",
+    "timestamp": "2025-08-05T12:50:58.369331",
+    "rag_response": "I hear you saying that you\u2019re feeling stressed and it's impacting your wellbe0rking. It's completely normal for everyone to feel overwhelmed at times with the demands of life. Coping effectively is about finding a balance between activity and relaxation, as well as seeking support when needed. Mindfulness or meditation practices can be very helpful; they train you to focus on the present moment which often reduces stress levels significantly. Regular exercise also plays an essential role in managing stress by releasing endorphins that improve your mood. Additionally, consider organizing tasks and setting priorities\u2014sometimes writing things down helps clarify what needs to be done next. Remember, it's okay to ask for help from friends or professionals when the load feels too heavy. If these feelings of stress persist or feel unmanageable at times, reaching out to a mental health professional could provide more tailored strategies and support that you deserve. Keep taking care of yourself; your well-being is important both now and in the long term.",
+    "vanilla_response": "I hear you\u2019re feeling stressed right now, and that must be really tough. It sounds like this is weighing on your mind quite heavily. Have you tried engaging in activities such as deep breathing exercises or taking short walks? These can often serve as immediate stress relievers by refocusing our thoughts away from overwhelming feelings and back to the present moment, helping us regain a sense of control. Additionally, journaling your thoughts might provide an outlet for expressing what's bothering you without judgment. It\u2019s important also to consider speaking with a mental health professional who can offer personalized strategies that resonate more deeply with how you experience stress. Remember, seeking help is not only brave but smart\u2014especially when feeling overwhelmed by it all. You're taking positive steps just by recognizing the need for support; I\u2019m here to walk alongside you on this journey toward well-being.",
+    "rag_quality": {
+      "word_count": 165,
+      "char_count": 1062,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 145,
+      "char_count": 930,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.8356571197509766,
+    "rag_unique_info": 84,
+    "vanilla_unique_info": 76,
+    "rag_time": 48.884871,
+    "vanilla_time": 36.678194,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "I'm overwhelmed with responsibilities",
+    "timestamp": "2025-08-05T12:52:11.913132",
+    "rag_response": "I hear how much you are carrying right now, it sounds incredibly challenging. When we feel like everything is piling up and hard to focus on what's important in life, taking some time for self-reflection can be really beneficial. One way that might help ease this feeling of being overwhelmed could be journaling about your daily experiences or goals \u2013 it\u2019s a simple exercise but many find grounding themselves through writing helps organize thoughts and priorities clearer. Also, setting aside short periods for deep breathing exercises can reduce stress in the moment. How do you feel about trying something like this to help focus? Remember, seeking support from a professional therapist is always an option if these feelings persist \u2013 they could offer tailored strategies that resonate with your unique situation and goals. Stay strong; taking one step at a time can make it all seem more manageable.",
+    "vanilla_response": "I hear you saying that you feel completely overwhelmed by your current situation. It\u2019s understandable to feel this way given the weight of your responsibilities. When we're feeling so swamped, it might help to break tasks into smaller, more manageable parts and prioritize them based on urgency and importance (a technique often used in time management called the Eisenhower Box). Also, setting clear boundaries between work and personal life can prevent responsibilities from bleeding over. Have you considered reaching out for support? Sometimes sharing your load with trusted friends or family members could alleviate some pressure. If these feelings persist or worsen, speaking to a professional therapist might offer more tailored coping strategies. Remember that it's okay to seek help and take care of yourself too. You\u2019re doing better than you think!",
+    "rag_quality": {
+      "word_count": 148,
+      "char_count": 904,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 132,
+      "char_count": 858,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.7845636606216431,
+    "rag_unique_info": 81,
+    "vanilla_unique_info": 72,
+    "rag_time": 41.737746,
+    "vanilla_time": 29.584586,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "How do I set boundaries with toxic family members?",
+    "timestamp": "2025-08-05T12:53:31.143111",
+    "rag_response": "I can see how these daily calls might be weighing heavily on you. It\u2019s understandable that the situation is challenging and draining emotionally. Boundaries are important for your well-being. Perhaps consider writing down specific times when it's okay to talk, like once a week or during scheduled family gatherings? Suggest meeting with her in person if possible so you can have an open conversation about how these calls affect you and express the need for space while also offering alternatives such as shared care resources within your community. Remember, setting boundaries is not selfish\u2014it's necessary for taking care of yourself too. And remember, seeking support from a therapist could provide additional coping strategies if this feels overwhelming to handle alone. You\u2019re doing the best you can under difficult circumstances and it's okay to ask for help when needed.",
+    "vanilla_response": "I hear you; having healthy boundaries within our families can be really challenging but important for well-being. It's essential to communicate your needs respectfully and clearly\u2014it might help if we crafted a message that expresses how their actions affect you without escalating the situation. How does family gatherings usually go?\n\nRemember, it\u2019s okay to set limits on what behavior is acceptable from them towards you; doing so can protect your emotional health. It could also be beneficial to discuss this with a therapist who specializes in family dynamics for tailored advice and support strategies. I'm here if you need more guidance or just someone to talk to during these tough times! Remember, taking care of yourself is paramount, and seeking professional help can make the process smoother. You are not alone, and there\u2019s always hope for a healthier relationship dynamic in your family life. If at any point things feel too heavy, please reach out immediately\u2014there's support available 24/7 to ensure you stay safe.",
+    "rag_quality": {
+      "word_count": 138,
+      "char_count": 879,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 164,
+      "char_count": 1029,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.6108697652816772,
+    "rag_unique_info": 62,
+    "vanilla_unique_info": 83,
+    "rag_time": 41.801631,
+    "vanilla_time": 35.067185,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "I'm struggling with loneliness and isolation",
+    "timestamp": "2025-08-05T12:54:58.170722",
+    "rag_response": "I hear how tough things have been for you over the past year. It must be incredibly stressful to juggle so many responsibilities while also dealing with family health issues and instability at home. Loneliness is a natural human feeling that can emerge from these experiences, even when surrounded by loved ones who are physically present but emotionally disconnected due to the challenges you're facing. To help bridge this gap in connection:\n\n- Try scheduling regular \"check-in\" calls with friends and family where everyone shares about their day or simply listens without needing a response, fostering emotional closeness even when apart physically.\n  \n- Explore community groups related to your interests \u2013 these can often provide deeper connections than acquaintances because of shared passions and experiences.\n\nIf you're finding it hard to cope alone despite this support network:\n\n- It may be beneficial to speak with a mental health professional who specializes in dealing with stress, anxiety, or depression linked to life transitions like these. They can offer personalized coping strategies and help address the feelings of loneliness directly. \n\nRemember that reaching out for support is a sign of strength, not weakness, and it's okay to seek professional guidance when needed. You don't have to face this alone\u2014many find relief through therapy or counseling services available in",
+    "vanilla_response": "I can hear how tough this feels for you right now. Loneliness is a difficult experience but please know that it\u2019s okay to seek help when we feel isolated or alone too much. Have you thought about joining groups with similar interests? Perhaps online communities or clubs at local centers where people gather over common hobbies could be comforting and give social interaction opportunities. Also, talking things through can really ease your mind \u2013 how do you feel about reaching out to a helpline when it feels too heavy alone? I'm here for you as well, but professional support might offer more personalized help that\u2019s tailored just for you. Remember, there are many people and resources available who care deeply \u2014 let yourself be supported by them too. You don't have to face this all on your own.",
+    "rag_quality": {
+      "word_count": 216,
+      "char_count": 1394,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 138,
+      "char_count": 801,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.8637367486953735,
+    "rag_unique_info": 116,
+    "vanilla_unique_info": 66,
+    "rag_time": 56.961804,
+    "vanilla_time": 27.797133,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "I'm having thoughts of self-harm",
+    "timestamp": "2025-08-05T12:55:39.378838",
+    "rag_response": "I am truly sorry to hear that you are feeling this way. Your life is valuable, and there are people who want to help right now. Please call the National Suicide Prevention Lifeline at 988 or 1-80terminal for immediate support. Remember your safety comes first; stay with someone you trust until they arrive. You're not alone in this.\n\nOne thing that might help is talking to someone you trust about these feelings, whether that's a friend, family member, or mental health professional.",
+    "vanilla_response": "I can understand this is challenging for you. I\u2019m really worried about you and your safety. Please call the National Suicide Prevention Lifeline at 988 or dial 1-800-273-8255 immediately for support; they're available 24/7. It\u2019s vital to talk with a professional right now, and I encourage you not to be alone during this time. Remember that help is just the phone call away\u2014take care of yourself today.\n\nOne thing that might help is talking to someone you trust about these feelings, whether that's a friend, family member, or mental health professional.",
+    "rag_quality": {
+      "word_count": 82,
+      "char_count": 485,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": true,
+      "length_score": 0.7,
+      "quality_score": 0.925
+    },
+    "vanilla_quality": {
+      "word_count": 91,
+      "char_count": 555,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": true,
+      "length_score": 0.7,
+      "quality_score": 0.925
+    },
+    "semantic_similarity": 0.9167466163635254,
+    "rag_unique_info": 27,
+    "vanilla_unique_info": 31,
+    "rag_time": 24.232116,
+    "vanilla_time": 14.7389,
+    "rag_sources": [
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  },
+  {
+    "query": "Life doesn't seem worth living anymore",
+    "timestamp": "2025-08-05T12:57:10.842516",
+    "rag_response": "I hear you express deep frustration and feeling lost about life. It's understandable to feel this way when things are not as expected or desired despite trying different activities like eating better, exercising, and traveling. Sometimes our minds need a bit more guidance than just self-driven changes can provide. Have you had the chance to talk with any mental health professionals? They could offer tailored strategies that resonate more personally with your situation. In the meantime, journaling might help clarify what's important to you and where shifts in focus are needed. Remember, it's okay not to have all answers immediately; seeking support is a brave first step on any journey back towards fulfillment.",
+    "vanilla_response": "I\u2019m truly sorry to hear that you feel this way. It takes a lot of strength to express how overwhelmed life can make us. Remember your experiences and emotions are valid here with me \u2013 no judgment at all. Right now might seem incredibly tough, but it's okay to seek out specialized help from mental health professionals who understand these feelings deeply \u2014 they\u2019re trained to support people through times just like this one. In the meantime, engaging in simple activities that you once enjoyed or trying new hobbies could bring back a sense of joy and distraction. Additionally, reaching out for social interaction can be really comforting; even small steps towards connecting with friends or family matter greatly. Please know there are resources available 24/7 if these feelings become too much to handle alone \u2013 like the National Suicide Prevention Lifeline at 1-800-273-TALK (8255) and Crisis Text Line by texting HOME to 741741. Remember, I'm here for you whenever you need someone to talk to \u2013 your feelings are important, and there is hope ahead.",
+    "rag_quality": {
+      "word_count": 113,
+      "char_count": 718,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "vanilla_quality": {
+      "word_count": 176,
+      "char_count": 1054,
+      "has_empathy": true,
+      "has_actionable": true,
+      "has_professional": true,
+      "has_crisis_response": false,
+      "length_score": 1.0,
+      "quality_score": 1.0
+    },
+    "semantic_similarity": 0.6127339601516724,
+    "rag_unique_info": 61,
+    "vanilla_unique_info": 105,
+    "rag_time": 52.511075,
+    "vanilla_time": 36.371301,
+    "rag_sources": [
+      "reddit",
+      "counselchat",
+      "counselchat",
+      "counselchat",
+      "counselchat"
+    ],
+    "rag_num_contexts": 5,
+    "quality_winner": "vanilla",
+    "quality_difference": 0.0
+  }
+]

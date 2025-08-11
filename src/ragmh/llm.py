@@ -1,4 +1,3 @@
-"""Local LLM wrapper for ollama/phi3:mini – now with quick-fix enhancements."""
 import os
 import json
 import logging
@@ -10,30 +9,22 @@ from dotenv import load_dotenv
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-# ──────────────────────────────────────────────────────────────
-#  Configuration
-# ──────────────────────────────────────────────────────────────
 DEFAULT_MODEL      = "phi3:mini"
 BASE_URL           = "http://localhost:11434"
-DEFAULT_TEMP       = 0.3          # global default
+DEFAULT_TEMP       = 0.3
 DEFAULT_MAX_TOKENS = 1024
 
-# ──────────────────────────────────────────────────────────────
-#  Quick-fix helpers
-# ──────────────────────────────────────────────────────────────
 from .quick_rag_fixes import (
     ENHANCED_SYSTEM_PROMPT,
     build_better_prompt,
     enhance_response,
 )
 
-# ──────────────────────────────────────────────────────────────
-#  Connection sanity check
-# ──────────────────────────────────────────────────────────────
 def verify_ollama_connection(
     base_url: str = BASE_URL,
     model: str = DEFAULT_MODEL,
 ) -> bool:
+    """Check Ollama connectivity and model availability."""
     try:
         res = requests.get(f"{base_url}/api/tags")
         res.raise_for_status()
@@ -46,14 +37,12 @@ def verify_ollama_connection(
         logger.error("Cannot connect to Ollama. Is it running?")
         return False
 
-# ──────────────────────────────────────────────────────────────
-#  Prompt builder (kept for compatibility but no longer used)
-# ──────────────────────────────────────────────────────────────
 def build_prompt(
     user_query: str,
     contexts: List[str],
     system_prompt: Optional[str] = None,
 ) -> str:
+    """Kept for compatibility; use build_better_prompt instead."""
     prompt = ""
     if system_prompt:
         prompt += f"System: {system_prompt}\n\n"
@@ -65,9 +54,6 @@ def build_prompt(
     prompt += f"User: {user_query}\nAssistant: "
     return prompt
 
-# ──────────────────────────────────────────────────────────────
-#  Low-level generate function
-# ──────────────────────────────────────────────────────────────
 def generate_response(
     prompt: str,
     context: Optional[List[str]] = None,
@@ -77,11 +63,8 @@ def generate_response(
     max_tokens: int = DEFAULT_MAX_TOKENS,
     llm: str = "ollama",
 ) -> str:
-    """Backend-agnostic generation with in-house quick fixes."""
-    # 1. Build the final prompt
+    """Backend-agnostic generation with quality fixes."""
     final_prompt = build_better_prompt(prompt, context or [])
-
-    # 2. Dispatch to the selected backend
     if llm == "ollama":
         payload = {
             "model": model,
@@ -97,7 +80,6 @@ def generate_response(
         except Exception as e:
             logger.error(f"Ollama generation failed: {e}")
             return f"Error: {e}"
-
     elif llm == "gpt-3.5-turbo-0125":
         openai_api_key = os.getenv("OPENAI_API_KEY")
         if not openai_api_key:
@@ -119,7 +101,6 @@ def generate_response(
         except Exception as e:
             logger.error(f"OpenAI generation failed: {e}")
             return f"Error: {e}"
-
     elif llm == "gemini-1.5-flash-8b":
         gemini_api_key = os.getenv("GEMINI_API_KEY")
         if not gemini_api_key:
@@ -134,21 +115,17 @@ def generate_response(
         except Exception as e:
             logger.error(f"Gemini generation failed: {e}")
             return f"Error: {e}"
-
     else:
         return f"Error: Unknown backend “{llm}”"
 
-# ──────────────────────────────────────────────────────────────
-#  Public helper for the RAG pipeline
-# ──────────────────────────────────────────────────────────────
 def generate_mental_health_response(
     user_query: str,
     retrieved_contexts: List[str],
     llm: str = "ollama",
-    temperature: float = 0.7,      # guide-recommended defaults
+    temperature: float = 0.7,
     max_tokens: int = 300,
 ) -> str:
-    """High-level wrapper used by chains.py."""
+    """High-level wrapper used by the RAG pipeline."""
     return generate_response(
         prompt=user_query,
         context=retrieved_contexts,
@@ -158,9 +135,6 @@ def generate_mental_health_response(
         max_tokens=max_tokens,
     )
 
-# ──────────────────────────────────────────────────────────────
-#  Quick CLI sanity test
-# ──────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     if verify_ollama_connection():
         print(generate_response("What is anxiety?")[:250], "…")
